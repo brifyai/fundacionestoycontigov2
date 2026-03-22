@@ -4,6 +4,7 @@ body {
   background-color: #f0f0f0;
 }
 
+/* Ajuste para el sidebar glassmorphism - sin gap entre sidebar y contenido */
 .parallax-container {
   position: relative;
   width: 100vw;
@@ -12,7 +13,42 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  background-color: transparent; /* Sin fondo blanco que cree línea */
+  margin-left: 0;
+  padding: 0;
+}
+
+/* En desktop, el contenido se extiende bajo el sidebar (sin gap) */
+@media (min-width: 1024px) {
+  .parallax-container {
+    width: 100vw;
+    margin-left: 0;
+    /* La imagen se extiende completa, el sidebar es overlay translúcido */
+  }
+}
+
+/* En desktop grande */
+@media (min-width: 1200px) {
+  .parallax-container {
+    width: 100vw;
+    margin-left: 0;
+  }
+}
+
+/* En tablet colapsado */
+@media (max-width: 1023px) and (min-width: 768px) {
+  .parallax-container {
+    width: 100vw;
+    margin-left: 0;
+  }
+}
+
+/* En mobile, el sidebar es overlay */
+@media (max-width: 767px) {
+  .parallax-container {
+    width: 100vw;
+    margin-left: 0;
+  }
 }
 
 .parallax-layer {

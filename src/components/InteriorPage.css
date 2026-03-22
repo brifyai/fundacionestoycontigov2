@@ -1,0 +1,51 @@
+/**
+ * InteriorPage.css - Layout para páginas interiores
+ * 
+ * El sidebar es overlay translúcido, el contenido se extiende completo
+ */
+
+.interior-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f8fa 0%, #e8f1f8 100%);
+}
+
+/* Main content area - sin margin-left, el sidebar es overlay */
+.interior-page main {
+  min-height: 100vh;
+  padding: 2rem;
+  width: 100%;
+  margin-left: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Desktop - padding extra para no tapar contenido con sidebar */
+@media (min-width: 1024px) {
+  .interior-page main {
+    padding: 3rem;
+    padding-left: calc(280px + 3rem); /* Espacio para el sidebar */
+  }
+}
+
+/* Desktop grande */
+@media (min-width: 1200px) {
+  .interior-page main {
+    padding: 3rem;
+    padding-left: calc(300px + 3rem);
+  }
+}
+
+/* Tablet colapsado */
+@media (max-width: 1023px) and (min-width: 768px) {
+  .interior-page main {
+    padding: 1.5rem;
+    padding-left: calc(72px + 1.5rem); /* Espacio para sidebar colapsado */
+  }
+}
+
+/* Mobile - sidebar es overlay */
+@media (max-width: 767px) {
+  .interior-page main {
+    padding: 1rem;
+    padding-top: 80px; /* Espacio para el botón hamburguesa */
+  }
+}
