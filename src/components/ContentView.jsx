@@ -302,7 +302,7 @@ const sectionContent = {
 A través de programas innovadores y un enfoque humano, trabajamos para crear un impacto positivo y sostenible en Santiago y sus alrededores.
 
 Nuestra misión es acompañar a las personas en sus procesos de desarrollo personal y comunitario, brindando herramientas y recursos que les permitan alcanzar su máximo potencial.`,
-    image: '/images/Capa de edificios protagonistas (1).png'
+    image: encodeURI('/images/Capa de edificios protagonistas (1).png')
   },
   programas: {
     title: 'Nuestros Programas',
@@ -318,7 +318,7 @@ Espacios de aprendizaje y crecimiento donde las personas pueden adquirir nuevas 
 **Intervención Comunitaria**
 
 Trabajamos directamente en los barrios de Santiago, identificando necesidades específicas y co-creando soluciones con los residentes locales.`,
-    image: '/images/Capa de ciudad lejana _ skyline.png'
+    image: encodeURI('/images/Capa de ciudad lejana _ skyline.png')
   },
   metodo: {
     title: 'Nuestro Método',
@@ -338,7 +338,7 @@ Colaboramos con diversas organizaciones, instituciones y actores locales para ma
 **Evaluación y Aprendizaje**
 
 Medimos constantemente nuestros resultados para mejorar y adaptar nuestras metodologías a los contextos cambiantes.`,
-    image: '/images/Capa de cordillera nevada lejana (1).png'
+    image: encodeURI('/images/Capa de cordillera nevada lejana (1).png')
   },
   impacto: {
     title: 'Nuestro Impacto',
@@ -358,7 +358,7 @@ Nuestro trabajo comunitario ha llegado a múltiples sectores de Santiago, creand
 **95% Satisfacción**
 
 Las personas que participan en nuestros programas reportan alta satisfacción y perciben mejoras significativas en su bienestar.`,
-    image: '/images/Capa de montañas medias _ neblina atmosférica.png'
+    image: encodeURI('/images/Capa de montañas medias _ neblina atmosférica.png')
   },
   'quienes-somos': {
     title: 'Quiénes Somos',

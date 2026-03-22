@@ -5,12 +5,13 @@ import SidebarMenu from './SidebarMenu.jsx';
 
 // Las imágenes están en la carpeta public/images
 // Usamos rutas absolutas desde la raíz para acceder a ellas
-const imgCielo = '/images/Capa del cielo (1).png';
-const imgCordillera = '/images/Capa de cordillera nevada lejana (1).png';
-const imgNeblina = '/images/Capa de montañas medias _ neblina atmosférica.png';
-const imgCiudadLejana = '/images/Capa de ciudad lejana _ skyline.png';
-const imgEdificios = '/images/Capa de edificios protagonistas (1).png';
-const imgVegetacion = '/images/Capa de vegetación y primer plano (1).png';
+// encodeURI codifica espacios y caracteres especiales para URLs
+const imgCielo = encodeURI('/images/Capa del cielo (1).png');
+const imgCordillera = encodeURI('/images/Capa de cordillera nevada lejana (1).png');
+const imgNeblina = encodeURI('/images/Capa de montañas medias _ neblina atmosférica.png');
+const imgCiudadLejana = encodeURI('/images/Capa de ciudad lejana _ skyline.png');
+const imgEdificios = encodeURI('/images/Capa de edificios protagonistas (1).png');
+const imgVegetacion = encodeURI('/images/Capa de vegetación y primer plano (1).png');
 
 const ParallaxScene = () => {
   const containerRef = useRef(null);
