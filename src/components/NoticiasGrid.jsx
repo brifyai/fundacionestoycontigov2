@@ -58,7 +58,6 @@ const noticiasData = [
     imagen: '/images/contacto1.png'
   }
 ];
-
 const NoticiaCard = ({ noticia, index }) => {
   return (
     <motion.article
