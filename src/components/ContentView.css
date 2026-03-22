@@ -128,7 +128,7 @@
 /* Responsive */
 @media (max-width: 768px) {
   .content-hero {
-    height: 300px;
+    height: 200px;
   }
   
   .content-hero-text {

@@ -355,6 +355,10 @@
 }
 
 @media (max-width: 768px) {
+  .qh-hero {
+    height: 200px;
+  }
+  
   .qh-header {
     padding: 60px 24px 50px;
   }
