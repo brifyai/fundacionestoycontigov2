@@ -1,9 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import ParallaxScene from './components/ParallaxScene.jsx'
 import InteriorPage from './components/InteriorPage.jsx'
 import Layout from './components/Layout.jsx'
 import SEO from './components/SEO.jsx'
+
+// Componente para hacer scroll al inicio al cambiar de ruta
+const ScrollToTop = () => {
+  const { pathname } = useLocation()
+  
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+  
+  return null
+}
 
 const AppContent = () => {
   const location = useLocation()
@@ -11,6 +22,7 @@ const AppContent = () => {
   
   return (
     <>
+      <ScrollToTop />
       <SEO />
       <Layout isHome={isHome}>
         <Routes>
