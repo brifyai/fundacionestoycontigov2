@@ -45,7 +45,7 @@
 }
 
 /* ============================================
-   SIDEBAR PRINCIPAL - Glassmorphism Suave
+   SIDEBAR PRINCIPAL - Glassmorphism Cristal Fino
    ============================================ */
 .sidebar-glass {
   position: fixed;
@@ -55,16 +55,16 @@
   width: var(--sidebar-width);
   z-index: 1000;
   
-  /* Efecto cristal más translúcido */
-  backdrop-filter: blur(14px) saturate(160%);
-  -webkit-backdrop-filter: blur(14px) saturate(160%);
-  background: rgba(255, 255, 255, 0.38);
+  /* Efecto cristal más translúcido - vidrio fino */
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  background: linear-gradient(180deg, rgba(255,255,255,0.28) 0%, rgba(245,248,250,0.22) 100%);
   
-  /* Sin borde derecho duro - integración suave con el fondo */
+  /* Sin borde derecho - integración total con el fondo */
   border-right: none;
   
-  /* Sombra muy suave para separación sutil */
-  box-shadow: 2px 0 18px rgba(44, 74, 94, 0.06);
+  /* Sombra mínima y difusa - casi imperceptible */
+  box-shadow: 1px 0 14px rgba(44, 74, 94, 0.04);
   
   /* Layout interno */
   display: flex;
@@ -78,13 +78,13 @@
 /* Estado colapsado (tablet) */
 .sidebar-glass.collapsed {
   width: var(--sidebar-collapsed);
-  background: rgba(255, 255, 255, 0.42);
+  background: linear-gradient(180deg, rgba(255,255,255,0.32) 0%, rgba(245,248,250,0.26) 100%);
 }
 
 /* Estado mobile */
 .sidebar-glass.mobile {
-  background: rgba(255, 255, 255, 0.45);
-  box-shadow: 4px 0 24px rgba(44, 74, 94, 0.1);
+  background: linear-gradient(180deg, rgba(255,255,255,0.35) 0%, rgba(245,248,250,0.28) 100%);
+  box-shadow: 2px 0 20px rgba(44, 74, 94, 0.08);
 }
 
 /* ============================================
@@ -184,19 +184,22 @@
    HEADER DEL SIDEBAR
    ============================================ */
 .sidebar-header {
-  padding: 32px 24px 24px;
+  padding: 32px 24px 20px;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
   flex-shrink: 0;
   
-  /* Glassmorphism más intenso en header */
+  /* Header más translúcido - integrado con el fondo */
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.5) 0%,
-    rgba(255, 255, 255, 0) 100%
+    rgba(255, 255, 255, 0.22) 0%,
+    rgba(255, 255, 255, 0.05) 100%
   );
+  
+  /* Separador inferior casi imperceptible */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .sidebar-logo-container {
@@ -308,11 +311,12 @@
 .sidebar-divider {
   height: 1px;
   margin: 0 24px;
+  /* Separador casi imperceptible - integración suave */
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(44, 74, 94, 0.1) 20%,
-    rgba(44, 74, 94, 0.1) 80%,
+    rgba(255, 255, 255, 0.15) 20%,
+    rgba(255, 255, 255, 0.15) 80%,
     transparent 100%
   );
   flex-shrink: 0;
@@ -375,7 +379,8 @@
 }
 
 .sidebar-menu-item:hover {
-  background: var(--accent-hover);
+  /* Hover suave celeste acuarela - no bloque sólido */
+  background: rgba(138, 180, 199, 0.12);
   transform: translateX(4px);
 }
 
@@ -384,10 +389,10 @@
   outline-offset: -2px;
 }
 
-/* Estado activo - más sutil y translúcido */
+/* Estado activo - fondo ligeramente más visible pero aún translúcido */
 .sidebar-menu-item.active {
-  background: rgba(255, 255, 255, 0.45);
-  box-shadow: 0 2px 8px rgba(107, 155, 192, 0.08);
+  background: rgba(255, 255, 255, 0.30);
+  box-shadow: 0 2px 8px rgba(107, 155, 192, 0.06);
 }
 
 .sidebar-menu-item.active .menu-item-icon {
@@ -484,7 +489,14 @@
   padding: 20px 24px;
   text-align: center;
   flex-shrink: 0;
-  border-top: 1px solid rgba(44, 74, 94, 0.05);
+  /* Borde superior casi imperceptible */
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  /* Fondo sutil para integración */
+  background: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.15) 0%,
+    transparent 100%
+  );
 }
 
 .footer-text {

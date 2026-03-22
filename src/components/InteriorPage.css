@@ -2,11 +2,27 @@
  * InteriorPage.css - Layout para páginas interiores
  * 
  * El sidebar es overlay translúcido, el contenido se extiende completo
+ * El fondo debe extenderse bajo el sidebar para integración visual
  */
 
 .interior-page {
   min-height: 100vh;
+  /* Fondo que se extiende completo bajo el sidebar */
   background: linear-gradient(135deg, #f5f8fa 0%, #e8f1f8 100%);
+  /* Asegurar que el fondo cubra todo */
+  position: relative;
+}
+
+/* Capa de fondo opcional para imágenes/texturas */
+.interior-page::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: inherit;
+  z-index: -1;
 }
 
 /* Main content area - sin margin-left, el sidebar es overlay */
@@ -16,6 +32,8 @@
   width: 100%;
   margin-left: 0;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Fondo transparente para dejar ver el fondo de .interior-page */
+  background: transparent;
 }
 
 /* Desktop - padding extra para no tapar contenido con sidebar */
