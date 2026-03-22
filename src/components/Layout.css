@@ -25,17 +25,20 @@
   height: 100vh;
   /* Transición suave del ancho */
   transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  /* El sidebar tiene su propio fondo de vidrio */
-  backdrop-filter: blur(16px) saturate(150%);
-  -webkit-backdrop-filter: blur(16px) saturate(150%);
-  background: linear-gradient(180deg, rgba(255,255,255,0.28) 0%, rgba(245,248,250,0.22) 100%);
-  box-shadow: 1px 0 14px rgba(44, 74, 94, 0.04);
+  /* Los estilos visuales (backdrop-filter, background) están en SidebarMenu.css */
+  /* para garantizar consistencia entre Home e interiores */
 }
 
-/* Estado colapsado del sidebar */
-.app-layout .sidebar-glass.collapsed {
-  background: linear-gradient(180deg, rgba(255,255,255,0.32) 0%, rgba(245,248,250,0.26) 100%);
+/* En el Home, el sidebar debe estar fixed para que la imagen pase por debajo */
+.app-layout.home-layout .sidebar-glass {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1000;
 }
+
+/* El sidebar usa el mismo glassmorphism translúcido en Home e interiores */
+/* Los estilos visuales están centralizados en SidebarMenu.css */
 
 /* ============================================
    CONTENIDO PRINCIPAL
@@ -57,20 +60,27 @@
 }
 
 /* Contenido del home (ParallaxScene) */
-.app-layout .home-main {
+.app-layout.home-layout .home-main {
   padding: 0;
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  /* El home ocupa todo el ancho del viewport */
+  width: 100vw;
+  min-width: 100vw;
   /* El home no tiene fondo - usa el del body o el parallax */
   background: transparent;
+  /* El main del home no debe tener flex:1 para evitar problemas con el sidebar fixed */
+  flex: none;
 }
 
 /* El contenido del home debe ocupar todo el espacio */
-.app-layout .home-main > * {
+.app-layout.home-layout .home-main > * {
   flex: 1;
-  min-height: 100%;
+  min-height: 100vh;
+  /* El parallax debe ocupar todo el ancho */
+  width: 100vw;
 }
 
 /* ============================================
@@ -121,10 +131,10 @@
     width: 100%;
   }
   
-  .app-layout .home-main {
+  .app-layout.home-layout .home-main {
     /* El home también necesita espacio para el botón hamburguesa en mobile */
     padding-top: 80px;
-    width: 100%;
+    width: 100vw;
     min-height: calc(100vh - 80px);
   }
 }

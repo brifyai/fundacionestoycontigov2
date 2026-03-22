@@ -37,6 +37,7 @@ const Layout = ({ children, isHome = false }) => {
     <div className={`app-layout ${isCollapsed ? 'sidebar-collapsed' : ''} ${isMobile ? 'mobile' : ''} ${isHome ? 'home-layout' : ''}`}>
       <SidebarMenu 
         isInterior={!isHome}
+        isHome={isHome}
         collapsed={isCollapsed}
         onCollapsedChange={setIsCollapsed}
       />
