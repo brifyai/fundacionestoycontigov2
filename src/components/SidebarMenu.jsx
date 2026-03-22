@@ -47,7 +47,7 @@ const SidebarMenu = ({
   onCollapsedChange 
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [internalCollapsed, setInternalCollapsed] = useState(false);
+  const [internalCollapsed, setInternalCollapsed] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
   
   // Usar el estado controlado si se proporciona, sino el interno
