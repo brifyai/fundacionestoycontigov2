@@ -15,6 +15,7 @@ const imgVegetacion = '/images/capa-vegetacion.png';
 const ParallaxScene = () => {
   const containerRef = useRef(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [accelStatus, setAccelStatus] = useState('pending'); // 'pending' | 'active' | 'denied' | 'unsupported'
 
   // Valores de movimiento del ratón/acelerómetro
   const mouseX = useMotionValue(0);
@@ -40,9 +41,10 @@ const ParallaxScene = () => {
     const { clientX, clientY } = e;
     const { innerWidth, innerHeight } = window;
 
-    // Calculamos la posición del ratón respecto al centro (-0.5 a 0.5)
-    const x = (clientX / innerWidth) - 0.5;
-    const y = (clientY / innerHeight) - 0.5;
+    // Calculamos la posición del ratón respecto al centro (-1 a 1)
+    // Multiplicamos por 2 para coincidir con el rango del acelerómetro
+    const x = ((clientX / innerWidth) - 0.5) * 2;
+    const y = ((clientY / innerHeight) - 0.5) * 2;
 
     mouseX.set(x);
     mouseY.set(y);
@@ -52,53 +54,68 @@ const ParallaxScene = () => {
   useEffect(() => {
     if (!isMobile) return;
 
-    // Solicitar permiso para iOS 13+ (requiere interacción del usuario)
-    const requestPermission = async () => {
-      if (typeof DeviceOrientationEvent !== 'undefined' && 
-          typeof DeviceOrientationEvent.requestPermission === 'function') {
-        try {
-          const permission = await DeviceOrientationEvent.requestPermission();
-          if (permission === 'granted') {
-            window.addEventListener('deviceorientation', handleDeviceOrientation);
-          }
-        } catch (error) {
-          console.log('Permiso de acelerómetro denegado:', error);
-        }
-      } else {
-        // Android y otros dispositivos no requieren permiso explícito
-        window.addEventListener('deviceorientation', handleDeviceOrientation);
-      }
-    };
+    let isActive = true;
 
-    // Handler para el evento de orientación del dispositivo
+    // Handler para el evento de orientación del dispositivo - DEFINIR PRIMERO
     const handleDeviceOrientation = (event) => {
       // gamma: inclinación izquierda/derecha (-90 a 90)
       // beta: inclinación adelante/atrás (-180 a 180)
       const { gamma, beta } = event;
       
-      if (gamma !== null && beta !== null) {
-        // Normalizar valores a rango -0.5 a 0.5
-        // gamma: -45 a 45 grados (rango práctico para uso)
-        // beta: -45 a 45 grados (rango práctico para uso)
-        const x = Math.max(-0.5, Math.min(0.5, gamma / 90));
-        const y = Math.max(-0.5, Math.min(0.5, beta / 90));
+      if (gamma !== null && beta !== null && isActive) {
+        // AUMENTAR SENSIBILIDAD: Usar rango más amplio para mejor efecto
+        // gamma: -45 a 45 grados → mapear a -1 a 1
+        // beta: -45 a 45 grados → mapear a -1 a 1
+        const x = Math.max(-1, Math.min(1, gamma / 45));
+        const y = Math.max(-1, Math.min(1, beta / 45));
         
         mouseX.set(x);
         mouseY.set(y);
       }
     };
 
-    // Intentar solicitar permiso inmediatamente (puede fallar sin interacción)
+    // Solicitar permiso para iOS 13+ (requiere interacción del usuario)
+    const requestPermission = async () => {
+      if (typeof DeviceOrientationEvent === 'undefined') {
+        setAccelStatus('unsupported');
+        console.log('❌ DeviceOrientationEvent no soportado');
+        return;
+      }
+      
+      if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+        try {
+          const permission = await DeviceOrientationEvent.requestPermission();
+          if (permission === 'granted') {
+            window.addEventListener('deviceorientation', handleDeviceOrientation);
+            setAccelStatus('active');
+            console.log('✅ Acelerómetro activado en iOS');
+          } else {
+            setAccelStatus('denied');
+            console.log('❌ Permiso de acelerómetro denegado');
+          }
+        } catch (error) {
+          setAccelStatus('denied');
+          console.log('❌ Error al solicitar permiso:', error);
+        }
+      } else {
+        // Android y otros dispositivos no requieren permiso explícito
+        window.addEventListener('deviceorientation', handleDeviceOrientation);
+        setAccelStatus('active');
+        console.log('✅ Acelerómetro activado (Android/otros)');
+      }
+    };
+
+    // Intentar solicitar permiso inmediatamente
     requestPermission();
 
     // También agregar listener para el primer toque (para iOS)
     const handleFirstTouch = () => {
       requestPermission();
-      document.removeEventListener('touchstart', handleFirstTouch);
     };
     document.addEventListener('touchstart', handleFirstTouch, { once: true });
 
     return () => {
+      isActive = false;
       window.removeEventListener('deviceorientation', handleDeviceOrientation);
       document.removeEventListener('touchstart', handleFirstTouch);
     };
@@ -127,10 +144,29 @@ const ParallaxScene = () => {
         mouseY.set(0);
       }}
     >
+      {/* Indicador de estado del acelerómetro (solo en móvil) */}
+      {isMobile && accelStatus === 'pending' && (
+        <div className="accel-indicator accel-pending">
+          📱 Toca para activar el efecto parallax
+        </div>
+      )}
+      {isMobile && accelStatus === 'active' && (
+        <div className="accel-indicator accel-active">
+          ✅ Inclina tu dispositivo para mover las capas
+        </div>
+      )}
+      {isMobile && accelStatus === 'denied' && (
+        <div className="accel-indicator accel-denied">
+          ❌ Permiso denegado. El efecto parallax no está disponible.
+        </div>
+      )}
+      
       {layers.map((layer, index) => {
         // Transformamos el valor de 0 a un valor en píxeles basado en el factor
-        const xOffset = useTransform(smoothX, [ -0.5, 0.5 ], [ -(layer.factor * 100), (layer.factor * 100) ]);
-        const yOffset = useTransform(smoothY, [ -0.5, 0.5 ], [ -(layer.factor * 50), (layer.factor * 50) ]);
+        // Ahora usamos rango -1 a 1 para acelerómetro (más sensible)
+        // y -0.5 a 0.5 para mouse
+        const xOffset = useTransform(smoothX, [ -1, 1 ], [ -(layer.factor * 200), (layer.factor * 200) ]);
+        const yOffset = useTransform(smoothY, [ -1, 1 ], [ -(layer.factor * 100), (layer.factor * 100) ]);
 
         return (
           <motion.img

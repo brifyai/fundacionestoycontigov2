@@ -55,6 +55,51 @@ body {
   }
 }
 
+/* Indicador de estado del acelerómetro */
+.accel-indicator {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 20px;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  animation: fadeInOut 4s ease-in-out;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.accel-pending {
+  background: rgba(0, 123, 255, 0.9);
+  color: white;
+  animation: pulse 2s infinite;
+}
+
+.accel-active {
+  background: rgba(40, 167, 69, 0.9);
+  color: white;
+  animation: fadeOut 5s forwards;
+  animation-delay: 3s;
+}
+
+.accel-denied {
+  background: rgba(220, 53, 69, 0.9);
+  color: white;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: translateX(-50%) scale(1); }
+  50% { opacity: 0.8; transform: translateX(-50%) scale(1.05); }
+}
+
+@keyframes fadeOut {
+  to { opacity: 0; visibility: hidden; }
+}
+
 /* Mobile */
 @media (max-width: 767px) {
   .parallax-container {
@@ -62,7 +107,24 @@ body {
   }
   
   .parallax-layer {
-    width: 120%; /* Más grande en mobile para el efecto parallax */
-    height: 120%;
+    width: 130%; /* Aumentado para permitir más movimiento en mobile */
+    height: 130%;
+    /* Asegurar que las imágenes se vean completas */
+    object-fit: cover;
+    object-position: center center;
+  }
+  
+  .accel-indicator {
+    font-size: 12px;
+    padding: 10px 16px;
+    bottom: 80px; /* Espacio para el botón de menú */
+  }
+}
+
+/* Ajustes para dispositivos muy pequeños */
+@media (max-width: 375px) {
+  .parallax-layer {
+    width: 140%;
+    height: 140%;
   }
 }
