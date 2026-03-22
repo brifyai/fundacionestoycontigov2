@@ -27,9 +27,9 @@
   --active-indicator: #6B9BC0;
   --white-soft: rgba(255, 255, 255, 0.85);
   
-  /* Dimensiones */
-  --sidebar-width: 280px;
-  --sidebar-collapsed: 72px;
+  /* Dimensiones - anchos aumentados para mejor presencia visual */
+  --sidebar-width: 380px;
+  --sidebar-collapsed: 120px;
   --header-height: 120px;
   --footer-height: 80px;
   
@@ -55,8 +55,11 @@
   flex-shrink: 0;
   z-index: 1000;
   
-  /* El fondo y efecto de vidrio ahora están en Layout.css */
-  /* Solo mantenemos el layout interno aquí */
+  /* Glassmorphism - mismo estilo para Home e interiores */
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  background: linear-gradient(180deg, rgba(255,255,255,0.28) 0%, rgba(245,248,250,0.22) 100%);
+  box-shadow: 1px 0 14px rgba(44, 74, 94, 0.04);
   
   /* Layout interno */
   display: flex;
@@ -70,7 +73,46 @@
 /* Estado colapsado (tablet/desktop) */
 .sidebar-glass.collapsed {
   width: var(--sidebar-collapsed);
-  /* El fondo está en Layout.css */
+  background: linear-gradient(180deg, rgba(255,255,255,0.32) 0%, rgba(245,248,250,0.26) 100%);
+}
+
+/* Ajustes específicos para modo colapsado */
+.sidebar-glass.collapsed .sidebar-header {
+  padding: 24px 12px;
+  justify-content: center;
+}
+
+.sidebar-glass.collapsed .sidebar-logo-container {
+  justify-content: center;
+}
+
+.sidebar-glass.collapsed .sidebar-logo-circle {
+  width: 52px;
+  height: 52px;
+}
+
+.sidebar-glass.collapsed .sidebar-divider {
+  margin: 0 16px;
+}
+
+.sidebar-glass.collapsed .sidebar-nav {
+  padding: 16px 12px;
+}
+
+.sidebar-glass.collapsed .sidebar-menu-item {
+  padding: 16px;
+  justify-content: center;
+  margin: 0;
+}
+
+.sidebar-glass.collapsed .menu-item-icon {
+  margin: 0;
+  width: 28px;
+  height: 28px;
+}
+
+.sidebar-glass.collapsed .sidebar-footer {
+  padding: 20px 12px;
 }
 
 /* Estado mobile - overlay drawer */
@@ -78,7 +120,6 @@
   position: fixed;
   left: 0;
   top: 0;
-  /* El fondo está en Layout.css */
 }
 
 /* ============================================
@@ -204,34 +245,24 @@
   min-width: 0;
 }
 
-/* Círculo multicolor del logo */
+/* Círculo del logo */
 .sidebar-logo-circle {
   width: 48px;
   height: 48px;
   border-radius: 50%;
   flex-shrink: 0;
-  padding: 3px;
-  background: white;
+  overflow: hidden;
+  background: transparent;
   box-shadow: 
     0 2px 8px rgba(44, 74, 94, 0.1),
-    inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+    inset 0 0 0 1px rgba(255, 255, 255, 0.3);
 }
 
-.logo-gradient {
+.logo-image {
   width: 100%;
   height: 100%;
+  object-fit: cover;
   border-radius: 50%;
-  background: conic-gradient(
-    from 0deg,
-    #FF6B6B 0deg,
-    #FFA94D 60deg,
-    #FFD93D 120deg,
-    #6BCB77 180deg,
-    #4D96FF 240deg,
-    #9B59B6 300deg,
-    #FF6B6B 360deg
-  );
-  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Títulos */
@@ -264,33 +295,58 @@
   text-overflow: ellipsis;
 }
 
-/* Botón colapsar/expandir */
-.collapse-toggle {
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
+/* Botón colapsar/expandir fuera del sidebar */
+.collapse-toggle-outside {
+  position: fixed;
+  top: 24px;
+  left: 0;
+  z-index: 1001;
+  
+  width: 32px;
+  height: 48px;
+  border-radius: 0 10px 10px 0;
   border: none;
-  background: rgba(255, 255, 255, 0.5);
+  
+  /* Glassmorphism */
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.85) 0%,
+    rgba(245, 248, 250, 0.75) 100%
+  );
+  
+  box-shadow: 
+    2px 2px 8px rgba(44, 74, 94, 0.1),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
+  
   transition: var(--transition-smooth);
 }
 
-.collapse-toggle:hover {
-  background: var(--accent-hover);
+.collapse-toggle-outside:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(245, 248, 250, 0.85) 100%
+  );
+  box-shadow: 
+    3px 3px 12px rgba(44, 74, 94, 0.15),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.6);
 }
 
-.collapse-toggle:focus-visible {
+.collapse-toggle-outside:focus-visible {
   outline: 2px solid var(--active-indicator);
   outline-offset: 2px;
 }
 
 .collapse-icon {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   fill: var(--text-secondary);
   transition: var(--transition-smooth);
 }
@@ -441,10 +497,10 @@
 /* Tooltip para modo colapsado */
 .menu-item-tooltip {
   position: absolute;
-  left: calc(100% + 12px);
+  left: calc(100% + 16px);
   top: 50%;
   transform: translateY(-50%);
-  padding: 8px 14px;
+  padding: 10px 16px;
   background: var(--text-primary);
   color: white;
   font-size: var(--font-size-small);
@@ -473,7 +529,7 @@
 .sidebar-menu-item:hover .menu-item-tooltip {
   opacity: 1;
   visibility: visible;
-  left: calc(100% + 16px);
+  left: calc(100% + 20px);
 }
 
 /* ============================================
@@ -512,7 +568,7 @@
    RESPONSIVE
    ============================================ */
 
-/* Tablet (768px - 1023px) */
+/* Tablet (768px - 1023px) - Modo colapsado */
 @media (max-width: 1023px) and (min-width: 768px) {
   .sidebar-glass {
     width: var(--sidebar-collapsed);
@@ -529,8 +585,8 @@
   }
   
   .sidebar-logo-circle {
-    width: 44px;
-    height: 44px;
+    width: 52px;
+    height: 52px;
   }
   
   .collapse-toggle {
@@ -538,24 +594,27 @@
   }
   
   .sidebar-divider {
-    margin: 0 12px;
+    margin: 0 16px;
   }
   
   .sidebar-nav {
-    padding: 12px 8px;
+    padding: 16px 12px;
   }
   
   .sidebar-menu-item {
-    padding: 14px;
+    padding: 16px;
     justify-content: center;
+    margin: 0;
   }
   
   .menu-item-icon {
     margin: 0;
+    width: 28px;
+    height: 28px;
   }
   
   .sidebar-footer {
-    padding: 16px 12px;
+    padding: 20px 12px;
   }
 }
 
@@ -602,10 +661,10 @@
   }
 }
 
-/* Desktop grande (> 1200px) */
+/* Desktop grande (> 1200px) - ancho aumentado para mejor presencia */
 @media (min-width: 1200px) {
   .sidebar-glass {
-    width: 300px;
+    width: 400px;
   }
   
   .sidebar-title {
@@ -691,4 +750,15 @@
   .sidebar-menu-item.active {
     background: rgba(0, 0, 0, 0.1);
   }
+}
+
+/* ============================================
+   HOME MENU - Mismo glassmorphism que interiores
+   ============================================ */
+/* El sidebar usa el mismo estilo glassmorphism en Home e interiores */
+/* Los estilos visuales están definidos en .sidebar-glass arriba */
+.sidebar-glass.home-menu,
+.sidebar-glass.home-menu.collapsed {
+  /* Mismo glassmorphism que el sidebar estándar */
+  /* No hay diferencias visuales entre Home e interiores */
 }

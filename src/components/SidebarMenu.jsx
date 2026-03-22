@@ -42,6 +42,7 @@ const menuItems = [
 const SidebarMenu = ({ 
   onNavigate, 
   isInterior = false, 
+  isHome = false,
   collapsed: controlledCollapsed,
   onCollapsedChange 
 }) => {
@@ -152,13 +153,34 @@ const SidebarMenu = ({
         )}
       </AnimatePresence>
 
+      {/* Botón colapsar/expandir fuera del sidebar (solo tablet/desktop) */}
+      {!isMobile && (
+        <motion.button
+          className={`collapse-toggle-outside ${isCollapsed ? 'collapsed' : ''}`}
+          onClick={toggleCollapse}
+          aria-label={isCollapsed ? 'Expandir menú' : 'Colapsar menú'}
+          title={isCollapsed ? 'Expandir' : 'Colapsar'}
+          initial={{ x: 0 }}
+          animate={{ x: isCollapsed ? 120 : 380 }}
+          transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+        >
+          <svg 
+            viewBox="0 0 24 24" 
+            className={`collapse-icon ${isCollapsed ? 'collapsed' : ''}`}
+            aria-hidden="true"
+          >
+            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+          </svg>
+        </motion.button>
+      )}
+
       {/* Sidebar principal */}
       <motion.aside
-        className={`sidebar-glass ${isCollapsed ? 'collapsed' : ''} ${isMobile ? 'mobile' : ''}`}
-        initial={isMobile ? { x: -280 } : { x: 0 }}
+        className={`sidebar-glass ${isCollapsed ? 'collapsed' : ''} ${isMobile ? 'mobile' : ''} ${isHome ? 'home-menu' : ''}`}
+        initial={isMobile ? { x: -380 } : { x: 0 }}
         animate={{ 
-          x: isMobile ? (isOpen ? 0 : -280) : 0,
-          width: isCollapsed ? 72 : 280
+          x: isMobile ? (isOpen ? 0 : -380) : 0,
+          width: isCollapsed ? 120 : 380
         }}
         transition={{ type: 'spring', damping: 30, stiffness: 300 }}
         role="navigation"
@@ -166,10 +188,14 @@ const SidebarMenu = ({
       >
         {/* Header del sidebar */}
         <header className="sidebar-header">
-          {/* Logo multicolor */}
+          {/* Logo */}
           <div className="sidebar-logo-container">
             <div className="sidebar-logo-circle" aria-hidden="true">
-              <div className="logo-gradient"></div>
+              <img 
+                src="/images/logo_menu.png" 
+                alt="" 
+                className="logo-image"
+              />
             </div>
             
             {/* Títulos (ocultos cuando está colapsado) */}
@@ -188,24 +214,6 @@ const SidebarMenu = ({
               )}
             </AnimatePresence>
           </div>
-
-          {/* Botón colapsar/expandir (solo tablet/desktop) */}
-          {!isMobile && (
-            <button
-              className="collapse-toggle"
-              onClick={toggleCollapse}
-              aria-label={isCollapsed ? 'Expandir menú' : 'Colapsar menú'}
-              title={isCollapsed ? 'Expandir' : 'Colapsar'}
-            >
-              <svg 
-                viewBox="0 0 24 24" 
-                className={`collapse-icon ${isCollapsed ? 'collapsed' : ''}`}
-                aria-hidden="true"
-              >
-                <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
-              </svg>
-            </button>
-          )}
         </header>
 
         {/* Separador */}
@@ -286,7 +294,7 @@ const SidebarMenu = ({
                 transition={{ duration: 0.2 }}
               >
                 <p className="footer-text">Fundación Estoy Contigo</p>
-                <p className="footer-copyright">© 2025</p>
+                <p className="footer-copyright">© 2026</p>
               </motion.div>
             )}
           </AnimatePresence>
