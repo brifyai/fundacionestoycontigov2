@@ -1,0 +1,28 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+}
+
+.parallax-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+
+.parallax-layer {
+  position: absolute;
+  /* Hacemos la imagen un poco más grande que la pantalla para que 
+     al moverse no se vean los bordes cortados */
+  width: 110%;
+  height: 110%;
+  object-fit: cover;
+  object-position: bottom center;
+  pointer-events: none;
+  will-change: transform;
+}

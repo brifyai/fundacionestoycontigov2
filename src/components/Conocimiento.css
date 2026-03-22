@@ -1,0 +1,435 @@
+/* Conocimiento - Estilos inspirados en Fundación Luksic */
+
+.conocimiento-container {
+  width: 100%;
+  min-height: 100vh;
+  background: #ffffff;
+}
+
+/* Hero Section */
+.conocimiento-hero {
+  position: relative;
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.conocimiento-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(26, 54, 93, 0.3) 0%,
+    rgba(44, 82, 130, 0.2) 100%
+  );
+}
+
+/* Header Section (título fuera de la imagen) */
+.conocimiento-header {
+  padding: 50px 40px 30px;
+  background: #ffffff;
+  text-align: center;
+}
+
+.conocimiento-header-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.conocimiento-header-content h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #1a365d;
+  margin: 0 0 16px 0;
+  line-height: 1.2;
+}
+
+.conocimiento-header-content p {
+  font-size: 1.25rem;
+  color: #4a5568;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Introducción */
+.conocimiento-intro {
+  padding: 30px 40px 60px;
+  background: #f7fafc;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.conocimiento-intro-content {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.conocimiento-intro-content p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #4a5568;
+  margin: 0;
+}
+
+/* Filtros */
+.conocimiento-filtros {
+  padding: 40px;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.conocimiento-filtros-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.conocimiento-filtro-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: #f7fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 50px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #4a5568;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.conocimiento-filtro-btn:hover {
+  background: #edf2f7;
+  border-color: #cbd5e0;
+  transform: translateY(-2px);
+}
+
+.conocimiento-filtro-btn.active {
+  background: #3182ce;
+  border-color: #3182ce;
+  color: #ffffff;
+}
+
+.conocimiento-filtro-btn.active .conocimiento-icon {
+  fill: #ffffff;
+}
+
+/* Iconos */
+.conocimiento-icon {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+.conocimiento-icon-small {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+/* Grid de Recursos */
+.conocimiento-grid-section {
+  padding: 60px 40px;
+  background: #ffffff;
+}
+
+.conocimiento-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+/* Cards */
+.conocimiento-card {
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 10px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  border: 1px solid #e2e8f0;
+}
+
+.conocimiento-card:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12), 0 20px 40px rgba(0, 0, 0, 0.15);
+  transform: translateY(-8px);
+}
+
+.conocimiento-card-image {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+  background: #f7fafc;
+}
+
+.conocimiento-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.conocimiento-card:hover .conocimiento-card-image img {
+  transform: scale(1.05);
+}
+
+.conocimiento-card-tipo {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 6px 14px;
+  background: rgba(49, 130, 206, 0.9);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-radius: 20px;
+}
+
+.conocimiento-card-content {
+  padding: 24px;
+}
+
+.conocimiento-card-fecha {
+  display: block;
+  font-size: 0.85rem;
+  color: #718096;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.conocimiento-card-content h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin: 0 0 12px 0;
+  line-height: 1.4;
+}
+
+.conocimiento-card-content p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #4a5568;
+  margin: 0 0 20px 0;
+}
+
+.conocimiento-card-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: transparent;
+  border: 2px solid #3182ce;
+  border-radius: 8px;
+  color: #3182ce;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.conocimiento-card-btn:hover {
+  background: #3182ce;
+  color: #ffffff;
+}
+
+.conocimiento-card-btn:hover .conocimiento-icon-small {
+  fill: #ffffff;
+}
+
+/* Newsletter */
+.conocimiento-newsletter {
+  padding: 80px 40px;
+  background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+}
+
+.conocimiento-newsletter-content {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.conocimiento-newsletter-content h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 16px 0;
+}
+
+.conocimiento-newsletter-content p {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0 0 32px 0;
+  line-height: 1.6;
+}
+
+.conocimiento-newsletter-form {
+  display: flex;
+  gap: 12px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.conocimiento-newsletter-input {
+  flex: 1;
+  padding: 16px 20px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.conocimiento-newsletter-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.conocimiento-newsletter-input:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.conocimiento-newsletter-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 28px;
+  background: #ffffff;
+  border: none;
+  border-radius: 12px;
+  color: #1a365d;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.conocimiento-newsletter-btn:hover {
+  background: #f7fafc;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.conocimiento-newsletter-btn .conocimiento-icon-small {
+  fill: #1a365d;
+}
+
+/* Colaboración */
+.conocimiento-colaboracion {
+  padding: 80px 40px;
+  background: #f7fafc;
+}
+
+.conocimiento-colaboracion-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.conocimiento-colaboracion-content h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin: 0 0 16px 0;
+}
+
+.conocimiento-colaboracion-content p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #4a5568;
+  margin: 0 0 28px 0;
+}
+
+.conocimiento-colaboracion-btn {
+  padding: 16px 40px;
+  background: #3182ce;
+  border: none;
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.conocimiento-colaboracion-btn:hover {
+  background: #2c5282;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(49, 130, 206, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .conocimiento-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .conocimiento-hero {
+    height: 300px;
+  }
+  
+  .conocimiento-hero-content h1 {
+    font-size: 2.5rem;
+  }
+  
+  .conocimiento-hero-content p {
+    font-size: 1.1rem;
+  }
+  
+  .conocimiento-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .conocimiento-filtros-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .conocimiento-filtro-btn {
+    justify-content: center;
+  }
+  
+  .conocimiento-newsletter-form {
+    flex-direction: column;
+  }
+  
+  .conocimiento-newsletter-btn {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .conocimiento-hero-content h1 {
+    font-size: 2rem;
+  }
+  
+  .conocimiento-intro,
+  .conocimiento-filtros,
+  .conocimiento-grid-section {
+    padding: 40px 24px;
+  }
+  
+  .conocimiento-card-content h3 {
+    font-size: 1.1rem;
+  }
+}

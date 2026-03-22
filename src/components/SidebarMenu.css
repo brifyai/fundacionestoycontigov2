@@ -1,0 +1,297 @@
+/* Material Design 3 - Sidebar Menu Styles */
+
+/* Variables de color - Paleta Azul Santiago */
+:root {
+  /* Colores principales inspirados en el cielo y edificios de Santiago */
+  --md-primary: #2E5C8A;
+  --md-on-primary: #FFFFFF;
+  --md-primary-container: #B8D4F0;
+  --md-on-primary-container: #0D3A5C;
+  
+  /* Colores de superficie */
+  --md-surface: #F5FAFF;
+  --md-surface-variant: #E1EEF7;
+  --md-on-surface: #1A2B3C;
+  --md-on-surface-variant: #4A5D6E;
+  --md-outline: #8BA4B8;
+  
+  /* Sombras */
+  --md-shadow-1: 0 1px 3px rgba(46, 92, 138, 0.12), 0 1px 2px rgba(46, 92, 138, 0.24);
+  --md-shadow-2: 0 3px 6px rgba(46, 92, 138, 0.15), 0 2px 4px rgba(46, 92, 138, 0.12);
+  --md-shadow-3: 0 10px 20px rgba(46, 92, 138, 0.15), 0 3px 6px rgba(46, 92, 138, 0.10);
+  --md-shadow-4: 0 14px 28px rgba(46, 92, 138, 0.20), 0 10px 10px rgba(46, 92, 138, 0.15);
+  
+  /* Bordes */
+  --md-radius-small: 8px;
+  --md-radius-medium: 12px;
+  --md-radius-large: 16px;
+  --md-radius-full: 50%;
+}
+
+/* Contenedor del header con botón y logo */
+.menu-header-container {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Botón con logo */
+.menu-toggle {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--md-radius-full);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--md-shadow-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  padding: 0;
+}
+
+/* Cuando el menú está abierto, mover todo el contenedor a la derecha */
+.menu-header-container.open {
+  transform: translateX(280px);
+}
+
+.menu-toggle:hover {
+  box-shadow: var(--md-shadow-3);
+}
+
+/* Imagen del logo en el botón */
+.menu-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--md-radius-full);
+  transform: translateY(3px);
+}
+
+/* Logo de la fundación */
+.fundacion-logo {
+  height: 64px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+/* Enlace del logo */
+.fundacion-logo-link {
+  display: block;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.fundacion-logo-link:hover {
+  transform: scale(1.02);
+}
+
+.fundacion-logo-link:active {
+  transform: scale(0.98);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .menu-header-container {
+    top: 16px;
+    left: 16px;
+  }
+  
+  .menu-toggle {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .fundacion-logo {
+    height: 40px;
+  }
+}
+
+/* Overlay */
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+  backdrop-filter: blur(2px);
+}
+
+/* Menú lateral */
+.sidebar-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 100vh;
+  background: var(--md-surface);
+  z-index: 999;
+  box-shadow: var(--md-shadow-4);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Header del menú */
+.menu-header {
+  padding: 24px 16px 16px;
+  background: linear-gradient(135deg, #2E5C8A 0%, #4A90D9 100%);
+}
+
+.menu-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  font-size: 32px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+.logo-text {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--md-on-primary);
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+  letter-spacing: 0.5px;
+}
+
+/* Items del menú */
+.menu-items {
+  flex: 1;
+  padding: 12px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow-y: auto;
+}
+
+.menu-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border: none;
+  background: transparent;
+  border-radius: var(--md-radius-medium);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+  overflow: hidden;
+}
+
+.menu-item:hover {
+  background: var(--md-surface-variant);
+}
+
+.menu-item.active {
+  background: var(--md-primary-container);
+}
+
+.menu-item-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--md-on-surface-variant);
+  transition: color 0.2s ease;
+}
+
+.menu-item:hover .menu-item-icon {
+  color: var(--md-on-surface);
+}
+
+.menu-item.active .menu-item-icon {
+  color: var(--md-primary);
+}
+
+.menu-item-label {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--md-on-surface);
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+  letter-spacing: 0.25px;
+}
+
+.menu-item.active .menu-item-label {
+  color: var(--md-on-primary-container);
+  font-weight: 600;
+}
+
+/* Indicador activo */
+.active-indicator {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 24px;
+  background: var(--md-primary);
+  border-radius: 0 4px 4px 0;
+}
+
+/* Footer del menú */
+.menu-footer {
+  padding: 16px;
+  border-top: 1px solid var(--md-surface-variant);
+  text-align: center;
+}
+
+.footer-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--md-on-surface);
+  margin: 0 0 4px 0;
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.footer-subtext {
+  font-size: 12px;
+  color: var(--md-on-surface-variant);
+  margin: 0;
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Scrollbar personalizada */
+.menu-items::-webkit-scrollbar {
+  width: 6px;
+}
+
+.menu-items::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.menu-items::-webkit-scrollbar-thumb {
+  background: var(--md-outline);
+  border-radius: 3px;
+}
+
+.menu-items::-webkit-scrollbar-thumb:hover {
+  background: var(--md-on-surface-variant);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sidebar-menu {
+    width: 260px;
+  }
+  
+  .menu-toggle {
+    top: 16px;
+    left: 16px;
+    width: 48px;
+    height: 48px;
+  }
+}
