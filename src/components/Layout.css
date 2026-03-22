@@ -126,16 +126,15 @@
   
   .app-layout .interior-main {
     padding: 1rem;
-    padding-top: 80px; /* Espacio para el botón hamburguesa */
-    /* En mobile el contenido ocupa todo el ancho */
+    /* El botón hamburguesa es fixed, no necesita espacio reservado */
     width: 100%;
   }
   
   .app-layout.home-layout .home-main {
-    /* El home también necesita espacio para el botón hamburguesa en mobile */
-    padding-top: 80px;
+    /* El botón hamburguesa es fixed, no empuja el contenido */
+    padding: 0;
     width: 100vw;
-    min-height: calc(100vh - 80px);
+    min-height: 100vh;
   }
 }
 

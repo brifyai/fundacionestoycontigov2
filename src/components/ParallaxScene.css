@@ -58,7 +58,7 @@ body {
 /* Mobile */
 @media (max-width: 767px) {
   .parallax-container {
-    min-height: calc(100vh - 80px); /* Restar espacio del botón hamburguesa */
+    min-height: 100vh; /* Ocupa todo el viewport, el botón es fixed overlay */
   }
   
   .parallax-layer {
