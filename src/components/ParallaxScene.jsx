@@ -16,6 +16,7 @@ const ParallaxScene = () => {
   const containerRef = useRef(null);
   const [isMobile, setIsMobile] = useState(false);
   const [accelStatus, setAccelStatus] = useState('pending'); // 'pending' | 'active' | 'denied' | 'unsupported'
+  const [showStatus, setShowStatus] = useState(true);
 
   // Valores de movimiento del ratón/acelerómetro
   const mouseX = useMotionValue(0);
@@ -33,6 +34,16 @@ const ParallaxScene = () => {
     };
     checkMobile();
   }, []);
+
+  // Ocultar indicadores después de 3 segundos
+  useEffect(() => {
+    if (accelStatus === 'active' || accelStatus === 'denied' || accelStatus === 'unsupported') {
+      const timer = setTimeout(() => {
+        setShowStatus(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [accelStatus]);
 
   // Función que captura el movimiento del ratón
   const handleMouseMove = (e) => {
@@ -150,14 +161,14 @@ const ParallaxScene = () => {
           📱 Toca para activar el efecto parallax
         </div>
       )}
-      {isMobile && accelStatus === 'active' && (
+      {isMobile && accelStatus === 'active' && showStatus && (
         <div className="accel-indicator accel-active">
           ✅ Inclina tu dispositivo para mover las capas
         </div>
       )}
-      {isMobile && accelStatus === 'denied' && (
+      {isMobile && accelStatus === 'denied' && showStatus && (
         <div className="accel-indicator accel-denied">
-          ❌ Permiso denegado. El efecto parallax no está disponible.
+          📱 Efecto parallax no disponible en este dispositivo
         </div>
       )}
       
