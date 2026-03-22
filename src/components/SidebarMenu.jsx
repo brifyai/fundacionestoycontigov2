@@ -174,6 +174,31 @@ const SidebarMenu = ({
         </motion.button>
       )}
 
+      {/* Botón cerrar para mobile - fuera del sidebar, como pestaña flotante */}
+      <AnimatePresence>
+        {isMobile && isOpen && (
+          <motion.button
+            className="mobile-close-outside"
+            onClick={() => setIsOpen(false)}
+            initial={{ x: -20, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: -20, opacity: 0 }}
+            transition={{ type: 'spring', damping: 30, stiffness: 300, delay: 0.1 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            aria-label="Cerrar menú"
+          >
+            <svg 
+              viewBox="0 0 24 24" 
+              className="close-icon"
+              aria-hidden="true"
+            >
+              <path d="M18.3 5.71a.996.996 0 0 0-1.41 0L12 10.59 7.11 5.7A.996.996 0 1 0 5.7 7.11L10.59 12 5.7 16.89a.996.996 0 1 0 1.41 1.41L12 13.41l4.89 4.89a.996.996 0 1 0 1.41-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4z"/>
+            </svg>
+          </motion.button>
+        )}
+      </AnimatePresence>
+
       {/* Sidebar principal */}
       <motion.aside
         className={`sidebar-glass ${isCollapsed ? 'collapsed' : ''} ${isMobile ? 'mobile' : ''} ${isHome ? 'home-menu' : ''}`}
@@ -214,25 +239,6 @@ const SidebarMenu = ({
               )}
             </AnimatePresence>
           </div>
-          
-          {/* Botón cerrar para mobile - dentro del header, alineado a la derecha */}
-          {isMobile && (
-            <motion.button
-              className="mobile-close-button"
-              onClick={() => setIsOpen(false)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              aria-label="Cerrar menú"
-            >
-              <svg 
-                viewBox="0 0 24 24" 
-                className="close-icon"
-                aria-hidden="true"
-              >
-                <path d="M18.3 5.71a.996.996 0 0 0-1.41 0L12 10.59 7.11 5.7A.996.996 0 1 0 5.7 7.11L10.59 12 5.7 16.89a.996.996 0 1 0 1.41 1.41L12 13.41l4.89 4.89a.996.996 0 1 0 1.41-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4z"/>
-              </svg>
-            </motion.button>
-          )}
         </header>
 
         {/* Separador */}
