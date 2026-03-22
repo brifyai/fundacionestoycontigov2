@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './ContentView.css';
 import QuienesSomos from './QuienesSomos';
@@ -479,261 +479,22 @@ Pronto lanzaremos nuestra aplicación móvil para facilitar el acceso a nuestros
   }
 };
 
-const ContentView = ({ section, onClose }) => {
-  const content = sectionContent[section] || sectionContent.inicio;
+// Componente wrapper que maneja el scroll
+const ContentViewWrapper = ({ children, section, onClose }) => {
+  const contentViewRef = useRef(null);
 
-  // Si es la sección quienes-somos, usar el componente especial
-  if (section === 'quienes-somos') {
-    return (
-      <AnimatePresence>
-        <motion.div
-          className="content-view"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 50 }}
-          transition={{ duration: 0.5, ease: 'easeOut' }}
-        >
-          {/* Botón de cerrar */}
-          <motion.button
-            className="content-close-btn"
-            onClick={onClose}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            <IconClose />
-          </motion.button>
-          
-          <QuienesSomos />
-        </motion.div>
-      </AnimatePresence>
-    );
-  }
-
-  // Si es la sección de contacto, mostrar con hero y formulario
-  if (section === 'contacto') {
-    return (
-      <AnimatePresence>
-        <motion.div
-          className="content-view"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 50 }}
-          transition={{ duration: 0.5, ease: 'easeOut' }}
-        >
-          {/* Botón de cerrar */}
-          <motion.button
-            className="content-close-btn"
-            onClick={onClose}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            <IconClose />
-          </motion.button>
-
-          {/* Imagen de fondo */}
-          <div className="content-hero">
-            <motion.img
-              src={content.image}
-              alt={content.title}
-              initial={{ scale: 1.1 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 0.8 }}
-            />
-            <div className="content-hero-overlay" />
-            <div className="content-hero-text">
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-              >
-                {content.title}
-              </motion.h1>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-              >
-                {content.subtitle}
-              </motion.p>
-            </div>
-          </div>
-
-          {/* Formulario de contacto */}
-          <ContactForm />
-        </motion.div>
-      </AnimatePresence>
-    );
-  }
-
-  // Si es la sección de noticias, mostrar con hero y grid de noticias
-  if (section === 'noticias') {
-    return (
-      <AnimatePresence>
-        <motion.div
-          className="content-view"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 50 }}
-          transition={{ duration: 0.5, ease: 'easeOut' }}
-        >
-          {/* Botón de cerrar */}
-          <motion.button
-            className="content-close-btn"
-            onClick={onClose}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            <IconClose />
-          </motion.button>
-
-          {/* Imagen de fondo */}
-          <div className="content-hero">
-            <motion.img
-              src={content.image}
-              alt={content.title}
-              initial={{ scale: 1.1 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 0.8 }}
-            />
-            <div className="content-hero-overlay" />
-            <div className="content-hero-text">
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-              >
-                {content.title}
-              </motion.h1>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-              >
-                {content.subtitle}
-              </motion.p>
-            </div>
-          </div>
-
-          {/* Grid de noticias */}
-          <NoticiasGrid />
-        </motion.div>
-      </AnimatePresence>
-    );
-  }
-
-  // Si es la sección nuestro-modelo, mostrar el grid de programas
-  if (section === 'nuestro-modelo') {
-    return (
-      <AnimatePresence>
-        <motion.div
-          className="content-view"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 50 }}
-          transition={{ duration: 0.5, ease: 'easeOut' }}
-        >
-          {/* Botón de cerrar */}
-          <motion.button
-            className="content-close-btn"
-            onClick={onClose}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            <IconClose />
-          </motion.button>
-
-          {/* Imagen de fondo */}
-          <div className="content-hero">
-            <motion.img
-              src={content.image}
-              alt={content.title}
-              initial={{ scale: 1.1 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 0.8 }}
-            />
-            <div className="content-hero-overlay" />
-            <div className="content-hero-text">
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-              >
-                {content.title}
-              </motion.h1>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-              >
-                {content.subtitle}
-              </motion.p>
-            </div>
-          </div>
-
-          {/* Grid de programas */}
-          <ProgramasGrid />
-        </motion.div>
-      </AnimatePresence>
-    );
-  }
-
-  // Si es la sección que-hacemos, usar el componente especial
-  if (section === 'que-hacemos') {
-    return (
-      <AnimatePresence>
-        <motion.div
-          className="content-view"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 50 }}
-          transition={{ duration: 0.5, ease: 'easeOut' }}
-        >
-          {/* Botón de cerrar */}
-          <motion.button
-            className="content-close-btn"
-            onClick={onClose}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            <IconClose />
-          </motion.button>
-          
-          <QueHacemos />
-        </motion.div>
-      </AnimatePresence>
-    );
-  }
-
-  // Si es la sección conocimiento, usar el componente especial
-  if (section === 'conocimiento') {
-    return (
-      <AnimatePresence>
-        <motion.div
-          className="content-view"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 50 }}
-          transition={{ duration: 0.5, ease: 'easeOut' }}
-        >
-          {/* Botón de cerrar */}
-          <motion.button
-            className="content-close-btn"
-            onClick={onClose}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            <IconClose />
-          </motion.button>
-          
-          <Conocimiento />
-        </motion.div>
-      </AnimatePresence>
-    );
-  }
+  // Efecto para hacer scroll al inicio cuando cambia la sección
+  useEffect(() => {
+    if (contentViewRef.current) {
+      contentViewRef.current.scrollTop = 0;
+    }
+  }, [section]);
 
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       <motion.div
+        ref={contentViewRef}
+        key={section}
         className="content-view"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -749,7 +510,28 @@ const ContentView = ({ section, onClose }) => {
         >
           <IconClose />
         </motion.button>
+        {children}
+      </motion.div>
+    </AnimatePresence>
+  );
+};
 
+const ContentView = ({ section, onClose }) => {
+  const content = sectionContent[section] || sectionContent.inicio;
+
+  // Si es la sección quienes-somos, usar el componente especial
+  if (section === 'quienes-somos') {
+    return (
+      <ContentViewWrapper section={section} onClose={onClose}>
+        <QuienesSomos />
+      </ContentViewWrapper>
+    );
+  }
+
+  // Si es la sección de contacto, mostrar con hero y formulario
+  if (section === 'contacto') {
+    return (
+      <ContentViewWrapper section={section} onClose={onClose}>
         {/* Imagen de fondo */}
         <div className="content-hero">
           <motion.img
@@ -778,32 +560,161 @@ const ContentView = ({ section, onClose }) => {
           </div>
         </div>
 
-        {/* Contenido */}
-        <motion.div
-          className="content-body"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-        >
-          <div className="content-text">
-            {content.content.split('\n\n').map((paragraph, index) => (
-              <motion.p
-                key={index}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.5 + index * 0.1 }}
-              >
-                {paragraph.startsWith('**') ? (
-                  <strong>{paragraph.replace(/\*\*/g, '')}</strong>
-                ) : (
-                  paragraph
-                )}
-              </motion.p>
-            ))}
+        {/* Formulario de contacto */}
+        <ContactForm />
+      </ContentViewWrapper>
+    );
+  }
+
+  // Si es la sección de noticias, mostrar con hero y grid de noticias
+  if (section === 'noticias') {
+    return (
+      <ContentViewWrapper section={section} onClose={onClose}>
+        {/* Imagen de fondo */}
+        <div className="content-hero">
+          <motion.img
+            src={content.image}
+            alt={content.title}
+            initial={{ scale: 1.1 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 0.8 }}
+          />
+          <div className="content-hero-overlay" />
+          <div className="content-hero-text">
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              {content.title}
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+            >
+              {content.subtitle}
+            </motion.p>
           </div>
-        </motion.div>
+        </div>
+
+        {/* Grid de noticias */}
+        <NoticiasGrid />
+      </ContentViewWrapper>
+    );
+  }
+
+  // Si es la sección nuestro-modelo, mostrar el grid de programas
+  if (section === 'nuestro-modelo') {
+    return (
+      <ContentViewWrapper section={section} onClose={onClose}>
+        {/* Imagen de fondo */}
+        <div className="content-hero">
+          <motion.img
+            src={content.image}
+            alt={content.title}
+            initial={{ scale: 1.1 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 0.8 }}
+          />
+          <div className="content-hero-overlay" />
+          <div className="content-hero-text">
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              {content.title}
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+            >
+              {content.subtitle}
+            </motion.p>
+          </div>
+        </div>
+
+        {/* Grid de programas */}
+        <ProgramasGrid />
+      </ContentViewWrapper>
+    );
+  }
+
+  // Si es la sección que-hacemos, usar el componente especial
+  if (section === 'que-hacemos') {
+    return (
+      <ContentViewWrapper section={section} onClose={onClose}>
+        <QueHacemos />
+      </ContentViewWrapper>
+    );
+  }
+
+  // Si es la sección conocimiento, usar el componente especial
+  if (section === 'conocimiento') {
+    return (
+      <ContentViewWrapper section={section} onClose={onClose}>
+        <Conocimiento />
+      </ContentViewWrapper>
+    );
+  }
+
+  return (
+    <ContentViewWrapper section={section} onClose={onClose}>
+      {/* Imagen de fondo */}
+      <div className="content-hero">
+        <motion.img
+          src={content.image}
+          alt={content.title}
+          initial={{ scale: 1.1 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 0.8 }}
+        />
+        <div className="content-hero-overlay" />
+        <div className="content-hero-text">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+          >
+            {content.title}
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+          >
+            {content.subtitle}
+          </motion.p>
+        </div>
+      </div>
+
+      {/* Contenido */}
+      <motion.div
+        className="content-body"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.4 }}
+      >
+        <div className="content-text">
+          {content.content.split('\n\n').map((paragraph, index) => (
+            <motion.p
+              key={index}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.5 + index * 0.1 }}
+            >
+              {paragraph.startsWith('**') ? (
+                <strong>{paragraph.replace(/\*\*/g, '')}</strong>
+              ) : (
+                paragraph
+              )}
+            </motion.p>
+          ))}
+        </div>
       </motion.div>
-    </AnimatePresence>
+    </ContentViewWrapper>
   );
 };
 
