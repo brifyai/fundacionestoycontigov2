@@ -9,7 +9,7 @@ const areasTrabajo = [
     descripcion: 'Capacitamos a estudiantes y adultos en herramientas tecnológicas e inteligencia artificial para potenciar sus oportunidades de desarrollo.',
     icono: 'education',
     color: '#3182CE',
-    imagen: encodeURI('/images/Capa de edificios protagonistas (1).png')
+    imagen: '/images/capa-edificios.png'
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ const areasTrabajo = [
     descripcion: 'Protegemos a las familias de estafas digitales y ciberdelitos mediante talleres prácticos de alfabetización digital segura.',
     icono: 'security',
     color: '#E53E3E',
-    imagen: encodeURI('/images/Capa de ciudad lejana _ skyline.png')
+    imagen: '/images/capa-ciudad.png'
   },
   {
     id: 3,
@@ -25,7 +25,7 @@ const areasTrabajo = [
     descripcion: 'Empoderamos a dueñas de casa y emprendedores locales con herramientas digitales para hacer crecer sus negocios.',
     icono: 'business',
     color: '#38A169',
-    imagen: encodeURI('/images/Capa de cordillera nevada lejana (1).png')
+    imagen: '/images/capa-cordillera.png'
   },
   {
     id: 4,
@@ -33,7 +33,7 @@ const areasTrabajo = [
     descripcion: 'Trabajamos con adultos mayores y grupos vulnerables para reducir la brecha digital y promover la autonomía tecnológica.',
     icono: 'inclusion',
     color: '#805AD5',
-    imagen: encodeURI('/images/Capa de montañas medias _ neblina atmosférica.png')
+    imagen: '/images/capa-neblina.png'
   }
 ];
 
