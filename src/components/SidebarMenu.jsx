@@ -32,11 +32,25 @@ const menuItems = [
  * - Responsive: Desktop (fijo), Tablet (colapsable), Mobile (drawer)
  * - Transiciones suaves y elegantes
  * - Accesible (ARIA labels, foco visible)
+ * 
+ * Props:
+ * - onNavigate: función callback al navegar
+ * - isInterior: booleano para páginas interiores
+ * - collapsed: booleano controlado desde el padre (opcional)
+ * - onCollapsedChange: función callback cuando cambia el estado (opcional)
  */
-const SidebarMenu = ({ onNavigate, isInterior = false }) => {
+const SidebarMenu = ({ 
+  onNavigate, 
+  isInterior = false, 
+  collapsed: controlledCollapsed,
+  onCollapsedChange 
+}) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [internalCollapsed, setInternalCollapsed] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  
+  // Usar el estado controlado si se proporciona, sino el interno
+  const isCollapsed = controlledCollapsed !== undefined ? controlledCollapsed : internalCollapsed;
   const navigate = useNavigate();
   const location = useLocation();
   
@@ -48,14 +62,19 @@ const SidebarMenu = ({ onNavigate, isInterior = false }) => {
   useEffect(() => {
     const checkScreenSize = () => {
       const width = window.innerWidth;
-      setIsMobile(width < 768);
-      setIsCollapsed(width >= 768 && width < 1024);
+      const newIsMobile = width < 768;
+      setIsMobile(newIsMobile);
+      
+      // Solo actualizar el estado colapsado si no está controlado desde fuera
+      if (controlledCollapsed === undefined) {
+        setInternalCollapsed(width >= 768 && width < 1024);
+      }
     };
 
     checkScreenSize();
     window.addEventListener('resize', checkScreenSize);
     return () => window.removeEventListener('resize', checkScreenSize);
-  }, []);
+  }, [controlledCollapsed]);
 
   // Cerrar menú mobile al cambiar de ruta
   useEffect(() => {
@@ -80,10 +99,24 @@ const SidebarMenu = ({ onNavigate, isInterior = false }) => {
     setIsOpen(!isOpen);
   };
 
-  // Toggle colapso en tablet
+  // Toggle colapso en tablet/desktop
   const toggleCollapse = () => {
-    setIsCollapsed(!isCollapsed);
+    const newCollapsed = !isCollapsed;
+    if (controlledCollapsed !== undefined && onCollapsedChange) {
+      // Si está controlado, notificar al padre
+      onCollapsedChange(newCollapsed);
+    } else {
+      // Si no está controlado, usar estado interno
+      setInternalCollapsed(newCollapsed);
+    }
   };
+
+  // Sincronizar estado interno cuando cambia el prop
+  useEffect(() => {
+    if (controlledCollapsed !== undefined) {
+      setInternalCollapsed(controlledCollapsed);
+    }
+  }, [controlledCollapsed]);
 
   return (
     <>

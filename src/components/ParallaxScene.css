@@ -1,56 +1,30 @@
+/**
+ * ParallaxScene.css - Estilos para la escena parallax del home
+ * 
+ * El contenedor ocupa todo el espacio disponible dentro del layout flex
+ */
+
+/* Reset de body */
 body {
   margin: 0;
   padding: 0;
   background-color: #f0f0f0;
 }
 
-/* Ajuste para el sidebar glassmorphism - sin gap entre sidebar y contenido */
+/* Contenedor parallax - ocupa todo el espacio disponible */
 .parallax-container {
   position: relative;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: transparent; /* Sin fondo blanco que cree línea */
-  margin-left: 0;
-  padding: 0;
+  background-color: transparent;
 }
 
-/* En desktop, el contenido se extiende bajo el sidebar (sin gap) */
-@media (min-width: 1024px) {
-  .parallax-container {
-    width: 100vw;
-    margin-left: 0;
-    /* La imagen se extiende completa, el sidebar es overlay translúcido */
-  }
-}
-
-/* En desktop grande */
-@media (min-width: 1200px) {
-  .parallax-container {
-    width: 100vw;
-    margin-left: 0;
-  }
-}
-
-/* En tablet colapsado */
-@media (max-width: 1023px) and (min-width: 768px) {
-  .parallax-container {
-    width: 100vw;
-    margin-left: 0;
-  }
-}
-
-/* En mobile, el sidebar es overlay */
-@media (max-width: 767px) {
-  .parallax-container {
-    width: 100vw;
-    margin-left: 0;
-  }
-}
-
+/* Capas del parallax */
 .parallax-layer {
   position: absolute;
   /* Hacemos la imagen un poco más grande que la pantalla para que 
@@ -61,4 +35,34 @@ body {
   object-position: bottom center;
   pointer-events: none;
   will-change: transform;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+/* Desktop grande */
+@media (min-width: 1200px) {
+  .parallax-container {
+    min-height: 100vh;
+  }
+}
+
+/* Tablet */
+@media (max-width: 1023px) and (min-width: 768px) {
+  .parallax-container {
+    min-height: 100vh;
+  }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .parallax-container {
+    min-height: calc(100vh - 80px); /* Restar espacio del botón hamburguesa */
+  }
+  
+  .parallax-layer {
+    width: 120%; /* Más grande en mobile para el efecto parallax */
+    height: 120%;
+  }
 }

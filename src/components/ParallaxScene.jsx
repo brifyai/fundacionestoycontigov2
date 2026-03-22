@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import './ParallaxScene.css';
-import SidebarMenu from './SidebarMenu.jsx';
 
 // Las imágenes están en la carpeta public/images
 // Usamos rutas absolutas desde la raíz para acceder a ellas
@@ -50,42 +49,37 @@ const ParallaxScene = () => {
   ];
 
   return (
-    <>
-      <SidebarMenu isInterior={false} />
-      
-      {/* Escena Parallax - Contenido principal */}
-      <motion.main 
-        id="main-content"
-        ref={containerRef} 
-        className="parallax-container"
-        onMouseMove={handleMouseMove}
-        onMouseLeave={() => {
-          // Vuelve al centro al sacar el ratón
-          mouseX.set(0);
-          mouseY.set(0);
-        }}
-      >
-        {layers.map((layer, index) => {
-          // Transformamos el valor de 0 a un valor en píxeles basado en el factor
-          const xOffset = useTransform(smoothX, [ -0.5, 0.5 ], [ -(layer.factor * 100), (layer.factor * 100) ]);
-          const yOffset = useTransform(smoothY, [ -0.5, 0.5 ], [ -(layer.factor * 50), (layer.factor * 50) ]);
+    <motion.div 
+      id="main-content"
+      ref={containerRef} 
+      className="parallax-container"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={() => {
+        // Vuelve al centro al sacar el ratón
+        mouseX.set(0);
+        mouseY.set(0);
+      }}
+    >
+      {layers.map((layer, index) => {
+        // Transformamos el valor de 0 a un valor en píxeles basado en el factor
+        const xOffset = useTransform(smoothX, [ -0.5, 0.5 ], [ -(layer.factor * 100), (layer.factor * 100) ]);
+        const yOffset = useTransform(smoothY, [ -0.5, 0.5 ], [ -(layer.factor * 50), (layer.factor * 50) ]);
 
-          return (
-            <motion.img
-              key={index}
-              src={layer.src}
-              className="parallax-layer"
-              style={{
-                x: xOffset,
-                y: yOffset,
-                zIndex: layer.zIndex,
-              }}
-              alt={`Capa ${layer.name}`}
-            />
-          );
-        })}
-      </motion.main>
-    </>
+        return (
+          <motion.img
+            key={index}
+            src={layer.src}
+            className="parallax-layer"
+            style={{
+              x: xOffset,
+              y: yOffset,
+              zIndex: layer.zIndex,
+            }}
+            alt={`Capa ${layer.name}`}
+          />
+        );
+      })}
+    </motion.div>
   );
 };
 

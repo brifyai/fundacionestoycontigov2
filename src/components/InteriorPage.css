@@ -1,69 +1,34 @@
 /**
- * InteriorPage.css - Layout para páginas interiores
+ * InteriorPage.css - Estilos específicos para el contenido de páginas interiores
  * 
- * El sidebar es overlay translúcido, el contenido se extiende completo
- * El fondo debe extenderse bajo el sidebar para integración visual
+ * El layout principal (sidebar + estructura flex) está en Layout.css
+ * Este archivo solo contiene estilos específicos del contenido interior
  */
 
 .interior-page {
-  min-height: 100vh;
-  /* Fondo que se extiende completo bajo el sidebar */
-  background: linear-gradient(135deg, #f5f8fa 0%, #e8f1f8 100%);
-  /* Asegurar que el fondo cubra todo */
-  position: relative;
-}
-
-/* Capa de fondo opcional para imágenes/texturas */
-.interior-page::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: inherit;
-  z-index: -1;
-}
-
-/* Main content area - sin margin-left, el sidebar es overlay */
-.interior-page main {
-  min-height: 100vh;
-  padding: 2rem;
   width: 100%;
-  margin-left: 0;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  /* Fondo transparente para dejar ver el fondo de .interior-page */
-  background: transparent;
+  height: 100%;
 }
 
-/* Desktop - padding extra para no tapar contenido con sidebar */
-@media (min-width: 1024px) {
-  .interior-page main {
-    padding: 3rem;
-    padding-left: calc(280px + 3rem); /* Espacio para el sidebar */
+/* Animación de entrada del contenido */
+@keyframes contentFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-/* Desktop grande */
-@media (min-width: 1200px) {
-  .interior-page main {
-    padding: 3rem;
-    padding-left: calc(300px + 3rem);
-  }
+.interior-page > * {
+  animation: contentFadeIn 0.3s ease-out;
 }
 
-/* Tablet colapsado */
-@media (max-width: 1023px) and (min-width: 768px) {
-  .interior-page main {
-    padding: 1.5rem;
-    padding-left: calc(72px + 1.5rem); /* Espacio para sidebar colapsado */
-  }
-}
-
-/* Mobile - sidebar es overlay */
-@media (max-width: 767px) {
-  .interior-page main {
-    padding: 1rem;
-    padding-top: 80px; /* Espacio para el botón hamburguesa */
+/* Accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  .interior-page > * {
+    animation: none;
   }
 }

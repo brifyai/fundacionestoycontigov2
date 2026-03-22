@@ -1,0 +1,147 @@
+/**
+ * Layout.css - Layout compartido para todas las páginas
+ * 
+ * El sidebar es parte del layout flex en desktop, no overlay.
+ * El contenido se ajusta dinámicamente al ancho del sidebar.
+ */
+
+/* ============================================
+   LAYOUT PRINCIPAL - Flexbox
+   ============================================ */
+.app-layout {
+  min-height: 100vh;
+  display: flex;
+  /* Fondo que se extiende completo */
+  background: linear-gradient(135deg, #f5f8fa 0%, #e8f1f8 100%);
+}
+
+/* ============================================
+   SIDEBAR - Integrado en el layout
+   ============================================ */
+.app-layout .sidebar-glass {
+  /* El sidebar es parte del layout, no fixed */
+  position: relative;
+  flex-shrink: 0;
+  height: 100vh;
+  /* Transición suave del ancho */
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================
+   CONTENIDO PRINCIPAL
+   ============================================ */
+.app-layout main {
+  flex: 1;
+  min-height: 100vh;
+  /* Transición suave para padding y margin */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Fondo transparente para dejar ver el fondo de .app-layout */
+  background: transparent;
+  /* Scroll independiente si es necesario */
+  overflow-y: auto;
+}
+
+/* Contenido de páginas interiores */
+.app-layout .interior-main {
+  padding: 2rem;
+}
+
+/* Contenido del home (ParallaxScene) */
+.app-layout .home-main {
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* El contenido del home debe ocupar todo el espacio */
+.app-layout .home-main > * {
+  flex: 1;
+  min-height: 100%;
+}
+
+/* ============================================
+   RESPONSIVE - Desktop
+   ============================================ */
+@media (min-width: 1024px) {
+  .app-layout .interior-main {
+    padding: 3rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .app-layout .interior-main {
+    padding: 3rem 4rem;
+  }
+}
+
+/* ============================================
+   RESPONSIVE - Tablet
+   ============================================ */
+@media (max-width: 1023px) and (min-width: 768px) {
+  .app-layout .interior-main {
+    padding: 1.5rem;
+  }
+}
+
+/* ============================================
+   RESPONSIVE - Mobile
+   ============================================ */
+@media (max-width: 767px) {
+  .app-layout {
+    /* En mobile, el sidebar es overlay, el contenido va debajo */
+    flex-direction: column;
+  }
+  
+  .app-layout .sidebar-glass {
+    /* En mobile el sidebar vuelve a ser fixed drawer */
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  .app-layout .interior-main {
+    padding: 1rem;
+    padding-top: 80px; /* Espacio para el botón hamburguesa */
+    /* En mobile el contenido ocupa todo el ancho */
+    width: 100%;
+  }
+  
+  .app-layout .home-main {
+    /* El home también necesita espacio para el botón hamburguesa en mobile */
+    padding-top: 80px;
+    width: 100%;
+    min-height: calc(100vh - 80px);
+  }
+}
+
+/* ============================================
+   ANIMACIONES
+   ============================================ */
+@keyframes contentSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.app-layout main {
+  animation: contentSlideIn 0.4s ease-out;
+}
+
+/* ============================================
+   ACCESIBILIDAD
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .app-layout .sidebar-glass,
+  .app-layout main {
+    transition: none;
+    animation: none;
+  }
+}
