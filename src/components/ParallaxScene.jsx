@@ -15,10 +15,8 @@ const imgVegetacion = '/images/capa-vegetacion.png';
 const ParallaxScene = () => {
   const containerRef = useRef(null);
   const [isMobile, setIsMobile] = useState(false);
-  const [accelStatus, setAccelStatus] = useState('pending'); // 'pending' | 'active' | 'denied' | 'unsupported'
-  const [showStatus, setShowStatus] = useState(true);
 
-  // Valores de movimiento del ratón/acelerómetro
+  // Valores de movimiento del ratón (solo en desktop)
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -34,16 +32,6 @@ const ParallaxScene = () => {
     };
     checkMobile();
   }, []);
-
-  // Ocultar indicadores después de 3 segundos
-  useEffect(() => {
-    if (accelStatus === 'active' || accelStatus === 'denied' || accelStatus === 'unsupported') {
-      const timer = setTimeout(() => {
-        setShowStatus(false);
-      }, 3000);
-      return () => clearTimeout(timer);
-    }
-  }, [accelStatus]);
 
   // Función que captura el movimiento del ratón
   const handleMouseMove = (e) => {
@@ -61,75 +49,14 @@ const ParallaxScene = () => {
     mouseY.set(y);
   };
 
-  // Efecto para manejar el acelerómetro en dispositivos móviles
+  // Efecto parallax desactivado en dispositivos móviles
+  // Las capas se mantienen estáticas para mejor rendimiento y compatibilidad
   useEffect(() => {
-    if (!isMobile) return;
-
-    let isActive = true;
-
-    // Handler para el evento de orientación del dispositivo - DEFINIR PRIMERO
-    const handleDeviceOrientation = (event) => {
-      // gamma: inclinación izquierda/derecha (-90 a 90)
-      // beta: inclinación adelante/atrás (-180 a 180)
-      const { gamma, beta } = event;
-      
-      if (gamma !== null && beta !== null && isActive) {
-        // AUMENTAR SENSIBILIDAD: Usar rango más amplio para mejor efecto
-        // gamma: -45 a 45 grados → mapear a -1 a 1
-        // beta: -45 a 45 grados → mapear a -1 a 1
-        const x = Math.max(-1, Math.min(1, gamma / 45));
-        const y = Math.max(-1, Math.min(1, beta / 45));
-        
-        mouseX.set(x);
-        mouseY.set(y);
-      }
-    };
-
-    // Solicitar permiso para iOS 13+ (requiere interacción del usuario)
-    const requestPermission = async () => {
-      if (typeof DeviceOrientationEvent === 'undefined') {
-        setAccelStatus('unsupported');
-        console.log('❌ DeviceOrientationEvent no soportado');
-        return;
-      }
-      
-      if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-        try {
-          const permission = await DeviceOrientationEvent.requestPermission();
-          if (permission === 'granted') {
-            window.addEventListener('deviceorientation', handleDeviceOrientation);
-            setAccelStatus('active');
-            console.log('✅ Acelerómetro activado en iOS');
-          } else {
-            setAccelStatus('denied');
-            console.log('❌ Permiso de acelerómetro denegado');
-          }
-        } catch (error) {
-          setAccelStatus('denied');
-          console.log('❌ Error al solicitar permiso:', error);
-        }
-      } else {
-        // Android y otros dispositivos no requieren permiso explícito
-        window.addEventListener('deviceorientation', handleDeviceOrientation);
-        setAccelStatus('active');
-        console.log('✅ Acelerómetro activado (Android/otros)');
-      }
-    };
-
-    // Intentar solicitar permiso inmediatamente
-    requestPermission();
-
-    // También agregar listener para el primer toque (para iOS)
-    const handleFirstTouch = () => {
-      requestPermission();
-    };
-    document.addEventListener('touchstart', handleFirstTouch, { once: true });
-
-    return () => {
-      isActive = false;
-      window.removeEventListener('deviceorientation', handleDeviceOrientation);
-      document.removeEventListener('touchstart', handleFirstTouch);
-    };
+    if (isMobile) {
+      // En móvil, mantener las capas en posición central (sin movimiento)
+      mouseX.set(0);
+      mouseY.set(0);
+    }
   }, [isMobile, mouseX, mouseY]);
 
   // Configuración de las capas y su velocidad de movimiento (factor)
@@ -155,23 +82,6 @@ const ParallaxScene = () => {
         mouseY.set(0);
       }}
     >
-      {/* Indicador de estado del acelerómetro (solo en móvil) */}
-      {isMobile && accelStatus === 'pending' && (
-        <div className="accel-indicator accel-pending">
-          📱 Toca para activar el efecto parallax
-        </div>
-      )}
-      {isMobile && accelStatus === 'active' && showStatus && (
-        <div className="accel-indicator accel-active">
-          ✅ Inclina tu dispositivo para mover las capas
-        </div>
-      )}
-      {isMobile && accelStatus === 'denied' && showStatus && (
-        <div className="accel-indicator accel-denied">
-          📱 Efecto parallax no disponible en este dispositivo
-        </div>
-      )}
-      
       {layers.map((layer, index) => {
         // Transformamos el valor de 0 a un valor en píxeles basado en el factor
         // Ahora usamos rango -1 a 1 para acelerómetro (más sensible)
