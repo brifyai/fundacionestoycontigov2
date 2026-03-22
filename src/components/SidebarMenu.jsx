@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, useLocation } from 'react-router-dom';
-import './SidebarMenu.css';
+import './SidebarMenu.css?v=2';
 import { 
   HomeIcon, 
   ProgramsIcon, 
@@ -160,9 +160,9 @@ const SidebarMenu = ({
           onClick={toggleCollapse}
           aria-label={isCollapsed ? 'Expandir menú' : 'Colapsar menú'}
           title={isCollapsed ? 'Expandir' : 'Colapsar'}
-          initial={{ x: 0 }}
-          animate={{ x: isCollapsed ? 120 : 380 }}
-          transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+        initial={{ x: 0 }}
+        animate={{ x: isCollapsed ? 120 : 280 }}
+        transition={{ type: 'spring', damping: 30, stiffness: 300 }}
         >
           <svg 
             viewBox="0 0 24 24" 
@@ -177,10 +177,10 @@ const SidebarMenu = ({
       {/* Sidebar principal */}
       <motion.aside
         className={`sidebar-glass ${isCollapsed ? 'collapsed' : ''} ${isMobile ? 'mobile' : ''} ${isHome ? 'home-menu' : ''}`}
-        initial={isMobile ? { x: -380 } : { x: 0 }}
+        initial={isMobile ? { x: -280 } : { x: 0 }}
         animate={{ 
-          x: isMobile ? (isOpen ? 0 : -380) : 0,
-          width: isCollapsed ? 120 : 380
+          x: isMobile ? (isOpen ? 0 : -280) : 0,
+          width: isCollapsed ? 120 : 280
         }}
         transition={{ type: 'spring', damping: 30, stiffness: 300 }}
         role="navigation"

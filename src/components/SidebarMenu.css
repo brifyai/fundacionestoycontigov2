@@ -27,8 +27,8 @@
   --active-indicator: #6B9BC0;
   --white-soft: rgba(255, 255, 255, 0.85);
   
-  /* Dimensiones - anchos aumentados para mejor presencia visual */
-  --sidebar-width: 380px;
+  /* Dimensiones - ancho optimizado para mostrar "Fundación Estoy Contigo" completo */
+  --sidebar-width: 280px;
   --sidebar-collapsed: 120px;
   --header-height: 120px;
   --footer-height: 80px;
@@ -219,11 +219,11 @@
    HEADER DEL SIDEBAR
    ============================================ */
 .sidebar-header {
-  padding: 32px 24px 20px;
+  padding: 28px 20px 18px;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 12px;
+  gap: 10px;
   flex-shrink: 0;
   
   /* Header más translúcido - integrado con el fondo */
@@ -240,7 +240,7 @@
 .sidebar-logo-container {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 10px;
   flex: 1;
   min-width: 0;
 }
@@ -275,14 +275,13 @@
 
 .sidebar-title {
   font-family: var(--font-family);
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
   color: var(--text-primary);
-  line-height: 1.3;
+  line-height: 1.25;
   margin: 0;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  /* Sin ellipsis - el ancho del sidebar está calculado para mostrar el texto completo */
 }
 
 .sidebar-subtitle {
@@ -661,18 +660,18 @@
   }
 }
 
-/* Desktop grande (> 1200px) - ancho aumentado para mejor presencia */
+/* Desktop grande (> 1200px) - mantiene el ancho optimizado */
 @media (min-width: 1200px) {
   .sidebar-glass {
-    width: 400px;
+    width: 280px;
   }
   
   .sidebar-title {
-    font-size: 1.15rem;
+    font-size: 1rem;
   }
   
   .sidebar-menu-item {
-    padding: 16px 20px;
+    padding: 14px 16px;
   }
 }
 
