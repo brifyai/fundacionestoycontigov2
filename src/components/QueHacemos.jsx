@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import OptimizedImage from './OptimizedImage';
 import './QueHacemos.css';
 import { IconEducation, IconSecurity, IconBusiness, IconInclusion, IconArrowRight } from './Icons';
 
@@ -58,7 +59,7 @@ const AreaCard = ({ area, index }) => {
       whileHover={{ y: -8, boxShadow: '0 20px 40px rgba(0,0,0,0.15)' }}
     >
       <div className="area-image">
-        <img src={area.imagen} alt={area.titulo} />
+        <OptimizedImage src={area.imagen} alt={area.titulo} loading="lazy" />
         <div className="area-image-overlay" style={{ backgroundColor: `${area.color}CC` }} />
       </div>
       <div className="area-content">
@@ -81,7 +82,7 @@ const QueHacemos = () => {
       {/* Hero Section - Solo Imagen */}
       <section className="qh-hero">
         <div className="qh-hero-image">
-          <img src="/images/que_hacemos1.png" alt="Qué Hacemos" />
+          <OptimizedImage src="/images/que_hacemos1.png" alt="Qué Hacemos" loading="eager" />
         </div>
       </section>
 
@@ -228,7 +229,7 @@ const QueHacemos = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
           >
-            <img src="/images/que_hacemos1.png" alt="Trabajo en terreno" />
+            <OptimizedImage src="/images/que_hacemos1.png" alt="Trabajo en terreno" loading="lazy" />
           </motion.div>
         </div>
       </section>

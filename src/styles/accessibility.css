@@ -1,0 +1,140 @@
+/* ============================================
+   ESTILOS DE ACCESIBILIDAD
+   ============================================ */
+
+/* Skip Link - Enlace para saltar al contenido */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #1a365d;
+  color: #fff;
+  padding: 8px 16px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  z-index: 10000;
+  border-radius: 0 0 4px 0;
+  transition: top 0.3s;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid #f6ad55;
+  outline-offset: 2px;
+}
+
+/* Focus Indicators - Indicadores de foco visibles */
+*:focus {
+  outline: none;
+}
+
+*:focus-visible {
+  outline: 3px solid #3182ce;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Focus para botones */
+button:focus-visible,
+[role="button"]:focus-visible {
+  outline: 3px solid #3182ce;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(49, 130, 206, 0.3);
+}
+
+/* Focus para enlaces */
+a:focus-visible {
+  outline: 3px solid #3182ce;
+  outline-offset: 2px;
+  background-color: rgba(49, 130, 206, 0.1);
+}
+
+/* Focus para inputs y textareas */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid #3182ce;
+  outline-offset: 2px;
+  border-color: #3182ce;
+  box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.2);
+}
+
+/* Focus para elementos del menú */
+.menu-item:focus-visible,
+.menu-toggle:focus-visible {
+  outline: 3px solid #f6ad55;
+  outline-offset: 2px;
+}
+
+/* Focus para cards y elementos interactivos */
+.noticia-card:focus-visible,
+.area-card:focus-visible,
+.programa-card:focus-visible,
+.conocimiento-card:focus-visible {
+  outline: 3px solid #3182ce;
+  outline-offset: 4px;
+}
+
+/* Reduced Motion - Respetar preferencias de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High Contrast Mode - Modo de alto contraste */
+@media (prefers-contrast: high) {
+  *:focus-visible {
+    outline: 3px solid #000;
+    outline-offset: 2px;
+  }
+  
+  .skip-link {
+    background: #000;
+    color: #fff;
+    border: 2px solid #fff;
+  }
+}
+
+/* Screen Reader Only - Texto solo para lectores de pantalla */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Skip Link visible cuando está enfocado */
+.skip-link:not(:focus) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link:focus {
+  position: fixed;
+  width: auto;
+  height: auto;
+  padding: 8px 16px;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}

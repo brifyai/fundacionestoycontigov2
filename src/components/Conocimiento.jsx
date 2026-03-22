@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import OptimizedImage from './OptimizedImage';
 import './Conocimiento.css';
 import { IconDocument, IconVideo, IconBook, IconDownload, IconArrowRight } from './Icons';
 
@@ -145,7 +146,11 @@ const Conocimiento = () => {
               whileHover={{ y: -8 }}
             >
               <div className="conocimiento-card-image">
-                <img src={recurso.imagen} alt={recurso.titulo} />
+                <OptimizedImage 
+                  src={recurso.imagen} 
+                  alt={recurso.titulo}
+                  loading="lazy"
+                />
                 <span className="conocimiento-card-tipo">{recurso.tipo}</span>
               </div>
               <div className="conocimiento-card-content">

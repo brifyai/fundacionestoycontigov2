@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import OptimizedImage from './OptimizedImage';
 import './NoticiasGrid.css';
 
 const noticiasData = [
@@ -67,10 +68,11 @@ const NoticiaCard = ({ noticia, index }) => {
       transition={{ delay: 0.1 * index, duration: 0.5 }}
     >
       <div className="noticia-imagen-container">
-        <img 
+        <OptimizedImage 
           src={noticia.imagen} 
           alt={noticia.titulo}
           className="noticia-imagen"
+          loading="lazy"
         />
         <span 
           className="noticia-categoria-badge"

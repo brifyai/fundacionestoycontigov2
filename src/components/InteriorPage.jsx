@@ -9,7 +9,9 @@ const InteriorPage = ({ section }) => {
   return (
     <>
       <SidebarMenu isInterior={true} />
-      <ContentView section={section} onClose={() => navigate('/')} />
+      <main id="main-content">
+        <ContentView section={section} onClose={() => navigate('/')} />
+      </main>
     </>
   );
 };

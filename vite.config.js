@@ -1,9 +1,44 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import { ViteImageOptimizer } from 'vite-plugin-image-optimizer'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    ViteImageOptimizer({
+      // Configuración para PNG
+      png: {
+        quality: 80,
+      },
+      // Configuración para JPEG
+      jpeg: {
+        quality: 80,
+      },
+      // Configuración para WebP (conversión automática)
+      webp: {
+        quality: 80,
+      },
+      // Configuración para SVG
+      svg: {
+        multipass: true,
+        plugins: [
+          {
+            name: 'preset-default',
+            params: {
+              overrides: {
+                cleanupNumericValues: false,
+                removeViewBox: false,
+              },
+            },
+          },
+        ],
+      },
+      // Incluir imágenes en public/
+      include: ['**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.svg', '**/*.webp'],
+      exclude: [],
+    }),
+  ],
   
   // Configuración de build para SEO y performance
   build: {

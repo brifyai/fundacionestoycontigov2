@@ -53,8 +53,9 @@ const ParallaxScene = () => {
     <>
       <SidebarMenu isInterior={false} />
       
-      {/* Escena Parallax */}
-      <motion.div 
+      {/* Escena Parallax - Contenido principal */}
+      <motion.main 
+        id="main-content"
         ref={containerRef} 
         className="parallax-container"
         onMouseMove={handleMouseMove}
@@ -83,7 +84,7 @@ const ParallaxScene = () => {
             />
           );
         })}
-      </motion.div>
+      </motion.main>
     </>
   );
 };
