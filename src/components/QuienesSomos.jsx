@@ -1,73 +1,19 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import './QuienesSomos.css';
-
-// Iconos Material Design 3
-const IconInclusion = () => (
-  <svg viewBox="0 0 24 24" className="qs-material-icon">
-    <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
-  </svg>
-);
-
-const IconSecurity = () => (
-  <svg viewBox="0 0 24 24" className="qs-material-icon">
-    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
-  </svg>
-);
-
-const IconCoConstruction = () => (
-  <svg viewBox="0 0 24 24" className="qs-material-icon">
-    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-  </svg>
-);
-
-const IconTransparency = () => (
-  <svg viewBox="0 0 24 24" className="qs-material-icon">
-    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
-  </svg>
-);
-
-const IconLocation = () => (
-  <svg viewBox="0 0 24 24" className="qs-material-icon qs-icon-large">
-    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-  </svg>
-);
-
-const IconHandshake = () => (
-  <svg viewBox="0 0 24 24" className="qs-material-icon qs-icon-large">
-    <path d="M16.48 10.41c-.39.39-1.04.39-1.43 0l-4.47-4.46-4.05 4.05c-.39.39-1.04.39-1.43 0-.39-.39-.39-1.04 0-1.43l4.46-4.46c.39-.39 1.04-.39 1.43 0l4.47 4.46 4.05-4.05c.39-.39 1.04-.39 1.43 0 .39.39.39 1.04 0 1.43l-4.46 4.46c-.39.39-1.04.39-1.43 0zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
-  </svg>
-);
-
-const IconMethod = () => (
-  <svg viewBox="0 0 24 24" className="qs-material-icon qs-icon-large">
-    <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/>
-  </svg>
-);
-
-const IconBuilding = () => (
-  <svg viewBox="0 0 24 24" className="qs-material-icon qs-icon-xl">
-    <path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/>
-  </svg>
-);
-
-const IconDirectorio = () => (
-  <svg viewBox="0 0 24 24" className="qs-material-icon qs-icon-avatar">
-    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-  </svg>
-);
-
-const IconCoordinadores = () => (
-  <svg viewBox="0 0 24 24" className="qs-material-icon qs-icon-avatar">
-    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
-  </svg>
-);
-
-const IconVoluntarios = () => (
-  <svg viewBox="0 0 24 24" className="qs-material-icon qs-icon-avatar">
-    <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
-  </svg>
-);
+import {
+  IconInclusion,
+  IconSecurity,
+  IconCoConstruction,
+  IconTransparency,
+  IconLocation,
+  IconHandshake,
+  IconMethod,
+  IconBuilding,
+  IconDirectorio,
+  IconCoordinadores,
+  IconVoluntarios
+} from './Icons';
 
 const QuienesSomos = () => {
   return (

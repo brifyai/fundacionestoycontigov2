@@ -6,67 +6,19 @@ import NoticiasGrid from './NoticiasGrid';
 import ProgramasGrid from './ProgramasGrid';
 import QueHacemos from './QueHacemos';
 import Conocimiento from './Conocimiento';
-
-// Iconos Material Design para contacto
-const IconPerson = () => (
-  <svg viewBox="0 0 24 24" className="contact-icon">
-    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-  </svg>
-);
-
-const IconEmail = () => (
-  <svg viewBox="0 0 24 24" className="contact-icon">
-    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-  </svg>
-);
-
-const IconPhone = () => (
-  <svg viewBox="0 0 24 24" className="contact-icon">
-    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-  </svg>
-);
-
-const IconMessage = () => (
-  <svg viewBox="0 0 24 24" className="contact-icon">
-    <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
-  </svg>
-);
-
-const IconSend = () => (
-  <svg viewBox="0 0 24 24" className="contact-icon-send">
-    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
-  </svg>
-);
-
-const IconSuccess = () => (
-  <svg viewBox="0 0 24 24" className="contact-status-icon">
-    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-  </svg>
-);
-
-const IconError = () => (
-  <svg viewBox="0 0 24 24" className="contact-status-icon">
-    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-  </svg>
-);
-
-const IconUsers = () => (
-  <svg viewBox="0 0 24 24" className="contact-info-icon">
-    <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
-  </svg>
-);
-
-const IconLocation = () => (
-  <svg viewBox="0 0 24 24" className="contact-info-icon">
-    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-  </svg>
-);
-
-const IconBusiness = () => (
-  <svg viewBox="0 0 24 24" className="contact-info-icon">
-    <path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/>
-  </svg>
-);
+import { 
+  IconPerson, 
+  IconEmail, 
+  IconPhone, 
+  IconMessage, 
+  IconSend, 
+  IconSuccess, 
+  IconError, 
+  IconUsers, 
+  IconLocation, 
+  IconBusiness,
+  IconClose
+} from './Icons';
 
 // Componente de tarjeta de información de contacto
 const ContactInfoCard = ({ icon, title, description }) => (
@@ -548,9 +500,7 @@ const ContentView = ({ section, onClose }) => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
           >
-            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-              <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-            </svg>
+            <IconClose />
           </motion.button>
           
           <QuienesSomos />
@@ -577,9 +527,7 @@ const ContentView = ({ section, onClose }) => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
           >
-            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-              <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-            </svg>
+            <IconClose />
           </motion.button>
 
           {/* Imagen de fondo */}
@@ -635,9 +583,7 @@ const ContentView = ({ section, onClose }) => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
           >
-            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-              <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-            </svg>
+            <IconClose />
           </motion.button>
 
           {/* Imagen de fondo */}
@@ -693,9 +639,7 @@ const ContentView = ({ section, onClose }) => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
           >
-            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-              <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-            </svg>
+            <IconClose />
           </motion.button>
 
           {/* Imagen de fondo */}
@@ -751,9 +695,7 @@ const ContentView = ({ section, onClose }) => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
           >
-            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-              <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-            </svg>
+            <IconClose />
           </motion.button>
           
           <QueHacemos />
@@ -780,9 +722,7 @@ const ContentView = ({ section, onClose }) => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
           >
-            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-              <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-            </svg>
+            <IconClose />
           </motion.button>
           
           <Conocimiento />
@@ -807,9 +747,7 @@ const ContentView = ({ section, onClose }) => {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
         >
-          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-          </svg>
+          <IconClose />
         </motion.button>
 
         {/* Imagen de fondo */}

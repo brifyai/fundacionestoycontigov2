@@ -1,37 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import './Conocimiento.css';
-
-// Iconos Material Design
-const IconDocument = () => (
-  <svg viewBox="0 0 24 24" className="conocimiento-icon">
-    <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
-  </svg>
-);
-
-const IconVideo = () => (
-  <svg viewBox="0 0 24 24" className="conocimiento-icon">
-    <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/>
-  </svg>
-);
-
-const IconBook = () => (
-  <svg viewBox="0 0 24 24" className="conocimiento-icon">
-    <path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/>
-  </svg>
-);
-
-const IconDownload = () => (
-  <svg viewBox="0 0 24 24" className="conocimiento-icon-small">
-    <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
-  </svg>
-);
-
-const IconArrow = () => (
-  <svg viewBox="0 0 24 24" className="conocimiento-icon-small">
-    <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
-  </svg>
-);
+import { IconDocument, IconVideo, IconBook, IconDownload, IconArrowRight } from './Icons';
 
 // Datos de recursos
 const recursosData = [
@@ -210,7 +180,7 @@ const Conocimiento = () => {
             />
             <button className="conocimiento-newsletter-btn">
               Suscribirse
-              <IconArrow />
+              <IconArrowRight />
             </button>
           </div>
         </motion.div>
