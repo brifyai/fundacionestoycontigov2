@@ -11,8 +11,8 @@
 .app-layout {
   min-height: 100vh;
   display: flex;
-  /* Fondo que se extiende completo */
-  background: linear-gradient(135deg, #f5f8fa 0%, #e8f1f8 100%);
+  /* Fondo transparente - el fondo real está en el contenido */
+  background: transparent;
 }
 
 /* ============================================
@@ -25,6 +25,16 @@
   height: 100vh;
   /* Transición suave del ancho */
   transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /* El sidebar tiene su propio fondo de vidrio */
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  background: linear-gradient(180deg, rgba(255,255,255,0.28) 0%, rgba(245,248,250,0.22) 100%);
+  box-shadow: 1px 0 14px rgba(44, 74, 94, 0.04);
+}
+
+/* Estado colapsado del sidebar */
+.app-layout .sidebar-glass.collapsed {
+  background: linear-gradient(180deg, rgba(255,255,255,0.32) 0%, rgba(245,248,250,0.26) 100%);
 }
 
 /* ============================================
@@ -35,8 +45,8 @@
   min-height: 100vh;
   /* Transición suave para padding y margin */
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  /* Fondo transparente para dejar ver el fondo de .app-layout */
-  background: transparent;
+  /* Fondo del contenido - el gradiente que estaba en app-layout */
+  background: linear-gradient(135deg, #f5f8fa 0%, #e8f1f8 100%);
   /* Scroll independiente si es necesario */
   overflow-y: auto;
 }
@@ -53,6 +63,8 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  /* El home no tiene fondo - usa el del body o el parallax */
+  background: transparent;
 }
 
 /* El contenido del home debe ocupar todo el espacio */
