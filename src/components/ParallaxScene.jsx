@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import './ParallaxScene.css';
 
@@ -14,8 +14,9 @@ const imgVegetacion = '/images/capa-vegetacion.png';
 
 const ParallaxScene = () => {
   const containerRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
 
-  // Valores de movimiento del ratón
+  // Valores de movimiento del ratón/acelerómetro
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -24,8 +25,18 @@ const ParallaxScene = () => {
   const smoothX = useSpring(mouseX, springConfig);
   const smoothY = useSpring(mouseY, springConfig);
 
+  // Detectar si es dispositivo móvil
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+    };
+    checkMobile();
+  }, []);
+
   // Función que captura el movimiento del ratón
   const handleMouseMove = (e) => {
+    if (isMobile) return; // No usar mouse en móvil
+    
     const { clientX, clientY } = e;
     const { innerWidth, innerHeight } = window;
 
@@ -36,6 +47,62 @@ const ParallaxScene = () => {
     mouseX.set(x);
     mouseY.set(y);
   };
+
+  // Efecto para manejar el acelerómetro en dispositivos móviles
+  useEffect(() => {
+    if (!isMobile) return;
+
+    // Solicitar permiso para iOS 13+ (requiere interacción del usuario)
+    const requestPermission = async () => {
+      if (typeof DeviceOrientationEvent !== 'undefined' && 
+          typeof DeviceOrientationEvent.requestPermission === 'function') {
+        try {
+          const permission = await DeviceOrientationEvent.requestPermission();
+          if (permission === 'granted') {
+            window.addEventListener('deviceorientation', handleDeviceOrientation);
+          }
+        } catch (error) {
+          console.log('Permiso de acelerómetro denegado:', error);
+        }
+      } else {
+        // Android y otros dispositivos no requieren permiso explícito
+        window.addEventListener('deviceorientation', handleDeviceOrientation);
+      }
+    };
+
+    // Handler para el evento de orientación del dispositivo
+    const handleDeviceOrientation = (event) => {
+      // gamma: inclinación izquierda/derecha (-90 a 90)
+      // beta: inclinación adelante/atrás (-180 a 180)
+      const { gamma, beta } = event;
+      
+      if (gamma !== null && beta !== null) {
+        // Normalizar valores a rango -0.5 a 0.5
+        // gamma: -45 a 45 grados (rango práctico para uso)
+        // beta: -45 a 45 grados (rango práctico para uso)
+        const x = Math.max(-0.5, Math.min(0.5, gamma / 90));
+        const y = Math.max(-0.5, Math.min(0.5, beta / 90));
+        
+        mouseX.set(x);
+        mouseY.set(y);
+      }
+    };
+
+    // Intentar solicitar permiso inmediatamente (puede fallar sin interacción)
+    requestPermission();
+
+    // También agregar listener para el primer toque (para iOS)
+    const handleFirstTouch = () => {
+      requestPermission();
+      document.removeEventListener('touchstart', handleFirstTouch);
+    };
+    document.addEventListener('touchstart', handleFirstTouch, { once: true });
+
+    return () => {
+      window.removeEventListener('deviceorientation', handleDeviceOrientation);
+      document.removeEventListener('touchstart', handleFirstTouch);
+    };
+  }, [isMobile, mouseX, mouseY]);
 
   // Configuración de las capas y su velocidad de movimiento (factor)
   // Valores más altos = mayor movimiento (primer plano)
