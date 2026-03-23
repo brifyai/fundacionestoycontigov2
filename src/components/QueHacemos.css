@@ -16,6 +16,13 @@
 .qh-hero-image {
   width: 100%;
   height: 100%;
+  display: block;
+}
+
+.qh-hero-image > div {
+  width: 100%;
+  height: 100%;
+  display: block !important;
 }
 
 .qh-hero-image img {
@@ -356,6 +363,11 @@
 
 @media (max-width: 768px) {
   .qh-hero {
+    height: 200px;
+  }
+  
+  .qh-hero-image,
+  .qh-hero-image > div {
     height: 200px;
   }
   
