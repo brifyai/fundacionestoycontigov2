@@ -393,8 +393,8 @@
 }
 
 @media (max-width: 768px) {
-  .qs-header {
-    height: 200px;
+  #qs-header.qs-header {
+    height: 200px !important;
   }
   
   .qs-section {
