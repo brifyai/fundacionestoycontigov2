@@ -19,7 +19,7 @@ const QuienesSomos = () => {
   return (
     <div className="quienes-somos-container">
       {/* Header Section con imagen de fondo */}
-      <section className="qs-header" style={{ backgroundImage: `url('/images/quienes_somos1.png')`, height: '500px' }}>
+      <section className="qs-header" style={{ backgroundImage: `url('/images/quienes_somos1.png')` }}>
         <div className="qs-header-overlay" />
         <motion.div 
           className="qs-header-content"
